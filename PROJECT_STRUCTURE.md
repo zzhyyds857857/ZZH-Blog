@@ -1,0 +1,97 @@
+# PROJECT_STRUCTURE.md
+
+项目目录结构与文件职责。规范以 `ZZH-Blog-SKILL-v3.md` 为最高依据,结构发生重大变化时必须同步更新本文档。
+
+## 顶层结构
+
+```text
+ZZH-Blog/
+├── docs/                          # VitePress 站点源目录
+│   ├── index.md                   # 首页:Hero → 最新文章 → 精选项目 → 当前学习 → 学习历程 → 关于我
+│   ├── posts/
+│   │   └── index.md               # 文章页(内置中文分类过滤,无独立标签导航)
+│   ├── projects.md                # 项目页(学习项目 / 个人项目 分组)
+│   ├── about.md                   # 关于页(教育背景 / 学习经历 / 技术方向 / 技术栈 / 当前目标)
+│   ├── java/ redis/ devops/       # 技术文章(按主题目录)
+│   ├── spring/ mysql/ microservices/ frontend/ notes/
+│   │                              # 后续按需启用,不预先创建空分类
+│   └── .vitepress/                # 站点配置与自定义主题
+├── public/                        # 静态资源
+├── .github/workflows/deploy.yml   # GitHub Pages 自动部署
+├── ZZH-Blog-SKILL-v3.md           # 最高规范(定位 / 中文强制 / 设计 / 内容 / AI 约束)
+├── PROJECT_STRUCTURE.md           # 本文档
+└── README.md                      # 项目说明(中文)
+```
+
+## docs/.vitepress 详细说明
+
+```text
+.vitepress/
+├── config.mts                     # 站点配置
+│                                  #   siteTitle: ZZH-Blog(点击回首页)
+│                                  #   base: '/ZZH-Blog/'(与仓库名一致,必须保持)
+│                                  #   hostname: https://zzhyyds857857.github.io
+│                                  #   导航:首页 / 文章 / 项目 / 关于(v3 #5)
+│                                  #   本地搜索中文翻译;buildEnd 生成 rss.xml
+└── theme/
+    ├── index.ts                   # 主题入口:继承默认主题,全局注册 12 个组件
+    ├── custom.css                 # 设计令牌 --zzh-*(蓝灰 #4f7dba / 圆角 8/14/18 / 轻阴影)
+    │                              #   暗色模式、reduced-motion、学习历程样式
+    ├── posts.data.ts              # 文章数据加载器:dateText 格式 2026.08.30
+    ├── data/
+    │   ├── projects.ts            # 项目数据(name / positioning / category Study|Personal)
+    │   ├── learning.ts            # 首页「当前学习」数据
+    │   └── journey.ts             # 首页「学习历程」数据
+    └── components/
+        ├── HeroSection.vue        # Hero:你好,我是 ZZH(真实学生定位,v3 #8)
+        ├── SocialLinks.vue        # 社交图标(GitHub · RSS,v3 #44)
+        ├── PostItem.vue           # 文章项(日期 / 标题 / 中文标签行)
+        ├── LatestPosts.vue        # 首页「最新文章」(查看全部)
+        ├── PostsList.vue          # 文章页:中文分类过滤(hash 路由)+ 年份归档
+        ├── ProjectCard.vue        # 项目卡片(name / positioning / status / tags)
+        ├── ProjectsList.vue       # 项目页:学习项目 / 个人项目 分组
+        ├── FeaturedProjects.vue   # 首页「精选项目」
+        ├── CurrentFocus.vue       # 首页「当前学习」(01/02/03 编号)
+        ├── LearningJourney.vue    # 首页「学习历程」(时间线,v3 #14)
+        ├── AboutPreview.vue       # 首页「关于我」预览
+        └── SiteFooter.vue         # 页脚:ZZH-Blog · 记录学习 · 分享技术 · 持续成长
+```
+
+## 关键设计决策(v3 对应条目)
+
+| 决策 | 依据 |
+| --- | --- |
+| 全站用户可见文字强制中文;仅技术名/品牌/代码保留英文 | v3 #4/#36 |
+| Header:左上 ZZH-Blog 可点击回首页;导航 首页/文章/项目/关于;右侧 搜索/主题/GitHub | v3 #5 |
+| 项目品牌化:苍穹外卖→FoodFlow、黑马点评→LocalHub、小哈书→Echo,必须标注学习项目来源,禁止包装为完全原创 | v3 #3 |
+| base 固定 `/ZZH-Blog/`(与仓库名一致,含大小写),所有资源引用经 `withBase()` | v3 #21 |
+| 分类过滤内置于文章页,标签使用中文 | v3 #6/#17 |
+| 首页模块:最新文章 / 精选项目 / 当前学习 / 学习历程 / 关于我 | v3 #7/#11-#14 |
+| 文章列表用 文本+分割线+轻 Hover;卡片仅用于项目/当前学习/关于预览 | v3 #25 |
+| 设计令牌 `--zzh-*` 蓝灰色系;暗色不纯黑、保持层次 | v3 #24/#27 |
+| RSS 构建期生成,含标题/链接/发布时间/摘要 | v3 #30 |
+
+## 数据流
+
+```text
+docs/{主题目录}/**/*.md (frontmatter: title/date/tags/description,tags 中文)
+        ↓ 构建期
+theme/posts.data.ts → LatestPosts(首页) / PostsList(文章页分类过滤)
+        ↓
+config.mts buildEnd → dist/rss.xml
+```
+
+新增文章无需修改列表代码,补全 frontmatter 即自动出现在首页、文章页与 RSS。
+
+## 部署流程
+
+```text
+git push main → GitHub Actions → pnpm install --frozen-lockfile
+  → pnpm build(失败阻止发布)→ docs/.vitepress/dist → GitHub Pages
+```
+
+首次部署需在仓库 zzhyyds857857/ZZH-Blog 的 Settings → Pages → Source 选择 GitHub Actions。
+
+## 质量门禁(v3 #43)
+
+发布前至少检查:构建成功、首页/文章/项目正常、搜索正常、RSS 正常、`/ZZH-Blog/` 路径正确、无死链、移动端无横向溢出、无明显控制台错误。
