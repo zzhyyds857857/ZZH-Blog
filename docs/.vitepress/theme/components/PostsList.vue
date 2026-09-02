@@ -2,6 +2,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { data as posts, type Post } from '../posts.data'
+import { aggregateCategories } from '../data/categories'
 import PostItem from './PostItem.vue'
 
 // Posts 页内置分类过滤(v3 #6:全部 / Java / Spring / MySQL / Redis / 微服务 / 分布式 / 前端 / DevOps / 随笔)
@@ -20,15 +21,7 @@ onUnmounted(() => {
   window.removeEventListener('hashchange', readHash)
 })
 
-const categories = computed<[string, number][]>(() => {
-  const counts = new Map<string, number>()
-  for (const post of posts) {
-    for (const tag of post.tags) {
-      counts.set(tag, (counts.get(tag) ?? 0) + 1)
-    }
-  }
-  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-})
+const categories = computed(() => aggregateCategories(posts))
 
 const filteredPosts = computed<Post[]>(() =>
   activeCategory.value ? posts.filter((post) => post.tags.includes(activeCategory.value)) : posts
@@ -62,14 +55,14 @@ function categoryHref(category: string): string {
         <span class="category-count">{{ posts.length }}</span>
       </a>
       <a
-        v-for="[category, count] in categories"
-        :key="category"
+        v-for="category in categories"
+        :key="category.name"
         class="category-chip"
-        :class="{ active: activeCategory === category }"
-        :href="categoryHref(category)"
+        :class="{ active: activeCategory === category.name }"
+        :href="categoryHref(category.name)"
       >
-        {{ category }}
-        <span class="category-count">{{ count }}</span>
+        {{ category.name }}
+        <span class="category-count">{{ category.count }}</span>
       </a>
     </div>
     <template v-for="[year, list] in yearGroups" :key="year">

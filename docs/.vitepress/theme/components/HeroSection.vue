@@ -4,9 +4,12 @@ import { withBase } from 'vitepress'
 
 <template>
   <section class="hero">
-    <h1 class="hero-title">个人博客 · 技术分享与成长记录</h1>
+    <h1 class="hero-title">欢迎来到我的技术博客</h1>
     <p class="hero-description">
-      记录 Java 后端、微服务、前端与全栈开发的学习、实践与思考。
+      这里记录着我对技术的热爱与探索,<br class="hero-line-break" />
+      也记录一路学习、实践与成长的点点滴滴。<br class="hero-line-break" />
+      无论是踩坑经历,还是心得体会,<br class="hero-line-break" />
+      都希望能给你带来一些启发。
     </p>
     <div class="hero-actions">
       <a class="hero-btn hero-btn-solid" :href="withBase('/posts/')">浏览文章</a>

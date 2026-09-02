@@ -6,6 +6,8 @@ export interface Post {
   date: string
   dateText: string
   tags: string[]
+  /** frontmatter description,用作列表摘要(纯文本) */
+  description?: string
 }
 
 declare const data: Post[]
@@ -20,7 +22,7 @@ function formatDate(date: Date): string {
 }
 
 export default createContentLoader(
-  '{java,spring,mysql,redis,microservices,frontend,devops,notes}/**/*.md',
+  '{java,spring,mysql,redis,microservices,frontend,devops}/**/*.md',
   {
     excerpt: false,
     transform(raw): Post[] {
@@ -30,6 +32,7 @@ export default createContentLoader(
             title?: string
             date?: string
             tags?: string[]
+            description?: string
           }
           const date = fm.date ? new Date(fm.date) : undefined
           if (!fm.title || !date || Number.isNaN(date.getTime())) {
@@ -40,7 +43,8 @@ export default createContentLoader(
             url,
             date: date.toISOString(),
             dateText: formatDate(date),
-            tags: fm.tags ?? []
+            tags: fm.tags ?? [],
+            description: fm.description
           }
         })
         .filter((post): post is Post => post !== undefined)

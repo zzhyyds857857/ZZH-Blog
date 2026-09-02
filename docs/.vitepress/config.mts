@@ -12,7 +12,8 @@ const base = '/ZZH-Blog/'
 // 用于 RSS / SEO 的绝对地址
 const hostname = 'https://zzhyyds857857.github.io'
 
-const postGlob = '{java,spring,mysql,redis,microservices,frontend,devops,notes}/**/*.md'
+// RSS 仅收录正式技术文章;学习随笔(notes/)为轻量日常记录,不进 RSS
+const postGlob = '{java,spring,mysql,redis,microservices,frontend,devops}/**/*.md'
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -57,11 +58,8 @@ export default defineConfig({
     sidebarMenuLabel: '菜单',
     darkModeSwitchLabel: '主题',
     lightModeSwitchTitle: '切换到浅色模式',
-    darkModeSwitchTitle: '切换到深色模式',
-    footer: {
-      message: '记录学习 · 分享技术 · 持续成长',
-      copyright: `© 2026 ZZH · 由 VitePress 驱动`
-    }
+    darkModeSwitchTitle: '切换到深色模式'
+    // 页脚统一由主题 Layout 的 layout-bottom 插槽渲染 SiteFooter 组件(theme/index.ts)
   },
 
   async buildEnd(siteConfig: SiteConfig) {
