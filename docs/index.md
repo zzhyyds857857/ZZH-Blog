@@ -11,10 +11,4 @@ footer: false
 
 <FeaturedProjects />
 
-<CurrentFocus />
-
-<LearningJourney />
-
-<AboutPreview />
-
 </div>

@@ -29,6 +29,12 @@
   --zzh-space-8: 32px;
   --zzh-space-12: 48px;
   --zzh-space-16: 64px;
+  --zzh-space-20: 80px;
+
+  /* ---- CTA 主按钮(暗色下用深色文字保证对比度) ---- */
+  --zzh-btn-solid-bg: var(--zzh-primary);
+  --zzh-btn-solid-fg: #ffffff;
+  --zzh-btn-solid-hover: #3f6da3;
 
   /* ---- 内容列宽 ---- */
   --zzh-max-width: 720px;
@@ -61,6 +67,9 @@
 
   --zzh-shadow-soft: 0 8px 30px rgb(0 0 0 / 25%);
 
+  --zzh-btn-solid-fg: #10151c;
+  --zzh-btn-solid-hover: #8fb0d4;
+
   --vp-c-brand-1: var(--zzh-primary);
   --vp-c-brand-2: #6b96c2;
   --vp-c-brand-3: #527ba6;
@@ -73,13 +82,8 @@
 .home-content {
   max-width: var(--zzh-max-width);
   margin: 0 auto;
-  padding: var(--zzh-space-12) var(--zzh-space-6) var(--zzh-space-8);
-}
-
-@media (min-width: 960px) {
-  .home-content {
-    padding-top: var(--zzh-space-16);
-  }
+  /* 大 Hero 自带上下留白,容器不再额外加 padding-top */
+  padding: 0 var(--zzh-space-6) var(--zzh-space-8);
 }
 
 /* 首页区块之间用分割线区分(v2 #51) */
@@ -89,72 +93,73 @@
   border-top: 1px solid var(--zzh-border);
 }
 
-/* ===================== Hero ===================== */
+/* ===================== 大 Hero(首页视觉重点) ===================== */
 .hero {
-  padding-top: var(--zzh-space-8);
+  padding: var(--zzh-space-16) 0;
   text-align: center;
 }
 
+@media (min-width: 960px) {
+  .hero {
+    padding: var(--zzh-space-20) 0;
+  }
+}
+
 .hero-title {
-  margin: 0 0 var(--zzh-space-3);
-  font-size: 30px;
-  line-height: 1.35;
+  margin: 0 0 var(--zzh-space-4);
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.25;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--zzh-text);
 }
 
-.hero-name {
-  color: var(--zzh-primary);
-}
-
-.hero-roles {
-  margin: 0 0 var(--zzh-space-2);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.6;
-  color: var(--zzh-text-secondary);
-}
-
 .hero-description {
-  margin: 0 auto;
-  max-width: 540px;
-  font-size: 15px;
-  line-height: 1.7;
+  margin: 0 auto var(--zzh-space-8);
+  max-width: 560px;
+  font-size: 17px;
+  line-height: 1.75;
   color: var(--zzh-text-secondary);
 }
 
-.hero .social-links {
-  justify-content: center;
-}
-
-/* ===================== Social Links ===================== */
-.social-links {
+.hero-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: var(--zzh-space-3);
 }
 
-.social-link {
+.hero-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  padding: 10px 24px;
   border-radius: var(--zzh-radius-sm);
-  color: var(--zzh-text-secondary);
-  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.social-link:hover {
+.hero-btn-solid {
+  background-color: var(--zzh-btn-solid-bg);
+  color: var(--zzh-btn-solid-fg);
+}
+
+.hero-btn-solid:hover {
+  background-color: var(--zzh-btn-solid-hover);
+}
+
+.hero-btn-outline {
+  border: 1px solid var(--zzh-border);
+  color: var(--zzh-text-secondary);
+}
+
+.hero-btn-outline:hover {
+  border-color: var(--zzh-primary);
   color: var(--zzh-primary);
   background-color: var(--zzh-primary-soft);
-  transform: translateY(-1px);
-}
-
-.social-link svg {
-  width: 18px;
-  height: 18px;
 }
 
 /* ===================== Section Header ===================== */
@@ -210,8 +215,8 @@
 
 .post-title {
   display: block;
-  margin-bottom: var(--zzh-space-1);
-  font-size: 16px;
+  margin-bottom: var(--zzh-space-2);
+  font-size: 17px;
   font-weight: 600;
   line-height: 1.5;
   color: var(--zzh-text);
@@ -399,48 +404,7 @@
   grid-template-columns: 1fr;
 }
 
-/* ===================== Current Focus(编号学习条目,v2 #18) ===================== */
-.focus-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.focus-item {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  column-gap: var(--zzh-space-4);
-  align-items: baseline;
-  padding: var(--zzh-space-3) 0;
-  border-bottom: 1px solid var(--zzh-border);
-}
-
-.focus-item:last-child {
-  border-bottom: none;
-}
-
-.focus-index {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--zzh-primary);
-  font-variant-numeric: tabular-nums;
-}
-
-.focus-name {
-  display: block;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--zzh-text);
-}
-
-.focus-detail {
-  display: block;
-  margin-top: 2px;
-  font-size: 13px;
-  color: var(--zzh-text-secondary);
-}
-
-/* ===================== 学习历程(v3 #14) ===================== */
+/* ===================== 学习历程(用于关于页,v3 #14) ===================== */
 .journey-list {
   list-style: none;
   margin: 0;
@@ -486,25 +450,6 @@
     grid-template-columns: 1fr;
     row-gap: var(--zzh-space-1);
   }
-}
-
-/* ===================== About Preview ===================== */
-.about-preview-text {
-  margin: 0 0 var(--zzh-space-3);
-  font-size: 15px;
-  line-height: 1.8;
-  color: var(--zzh-text-secondary);
-}
-
-.about-preview-link {
-  font-size: 14px;
-  color: var(--zzh-primary);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.about-preview-link:hover {
-  opacity: 0.8;
 }
 
 /* ===================== Site Footer ===================== */

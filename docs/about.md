@@ -6,24 +6,17 @@ editLink: false
 
 # 关于我
 
-我是一名广东理工学院网络工程专业学生,2028 届毕业。
+我是 ZZH,一名广东理工学院网络工程专业学生(2028 届),Java 后端学习者,正在补齐现代前端,向全栈开发方向成长。
 
-我从 2025 年 12 月开始学习 Java,逐步学习 Java 后端、Spring、MySQL、Redis 和微服务。2026 年暑假开始补充 HTML、CSS、JavaScript 和 Vue 3,希望逐渐构建完整的前后端开发能力。
-
-目前主要方向:Java 后端、微服务、分布式系统、现代前端与全栈开发。
+本博客记录我在 Java 后端、微服务、前端与全栈开发方向上的学习、实践与思考,内容以真实学习过程为准。
 
 ## 教育背景
 
 - 广东理工学院 · 网络工程专业 · 2028 届
 
-## 学习经历
+## 学习历程
 
-```text
-2025.12        开始学习 Java
-2026.01 - 06   Java 后端 / Spring / MySQL / Redis / 微服务
-2026.07 - 08   HTML / CSS / JavaScript / Vue 3
-2026.09+       TypeScript / 前端工程化 / 全栈开发
-```
+<LearningJourney title="" />
 
 ## 项目经历
 
@@ -39,11 +32,13 @@ editLink: false
 
 ## 技术方向
 
-- Java 后端:Spring 生态、并发、JVM
-- 中间件:Redis 缓存与分布式、MySQL 索引与事务
-- 微服务:Nacos / Gateway / OpenFeign
-- 前端:Vue 3、TypeScript(当前学习重点)
-- DevOps:Docker、Linux、GitHub Actions
+- Java 后端
+- 微服务
+- Redis / MySQL
+- Docker
+- Vue 3
+- TypeScript
+- 全栈开发
 
 ## 技术栈
 
@@ -56,9 +51,7 @@ editLink: false
 
 ## 当前目标
 
-- 系统建立 TypeScript 与前端工程化能力
-- 完成第一个完全独立设计与实现的全栈项目
-- 持续写作,把学习过程沉淀为可检索的知识
+继续完善 Java 后端能力,同时补齐前端和全栈开发能力;完成第一个完全独立设计与实现的全栈项目,并持续写作,把学习过程沉淀为可检索的知识。
 
 ## 联系方式
 

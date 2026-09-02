@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import SocialLinks from './SocialLinks.vue'
+import { withBase } from 'vitepress'
 </script>
 
 <template>
   <section class="hero">
-    <h1 class="hero-title">你好,我是 <span class="hero-name">ZZH</span></h1>
-    <p class="hero-roles">
-      网络工程专业 · 2028 届<br />
-      Java 后端学习者 · 正在补齐现代前端
-    </p>
+    <h1 class="hero-title">个人博客 · 技术分享与成长记录</h1>
     <p class="hero-description">
-      记录 Java、微服务、Redis、数据库、前端与全栈开发的学习与实践。
+      记录 Java 后端、微服务、前端与全栈开发的学习、实践与思考。
     </p>
-    <SocialLinks />
+    <div class="hero-actions">
+      <a class="hero-btn hero-btn-solid" :href="withBase('/posts/')">浏览文章</a>
+      <a class="hero-btn hero-btn-outline" :href="withBase('/about')">关于我</a>
+    </div>
   </section>
 </template>

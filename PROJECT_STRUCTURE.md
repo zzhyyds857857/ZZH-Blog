@@ -7,11 +7,11 @@
 ```text
 ZZH-Blog/
 ├── docs/                          # VitePress 站点源目录
-│   ├── index.md                   # 首页:Hero → 最新文章 → 精选项目 → 当前学习 → 学习历程 → 关于我
+│   ├── index.md                   # 首页:大 Hero → 最新文章 → 精选项目(技术博客首页定位)
 │   ├── posts/
 │   │   └── index.md               # 文章页(内置中文分类过滤,无独立标签导航)
 │   ├── projects.md                # 项目页(学习项目 / 个人项目 分组)
-│   ├── about.md                   # 关于页(教育背景 / 学习经历 / 技术方向 / 技术栈 / 当前目标)
+│   ├── about.md                   # 关于页(个人简介 / 教育背景 / 学习历程 / 项目经历 / 技术方向 / 技术栈 / 当前目标)
 │   ├── java/ redis/ devops/       # 技术文章(按主题目录)
 │   ├── spring/ mysql/ microservices/ frontend/ notes/
 │   │                              # 后续按需启用,不预先创建空分类
@@ -34,26 +34,22 @@ ZZH-Blog/
 │                                  #   导航:首页 / 文章 / 项目 / 关于(v3 #5)
 │                                  #   本地搜索中文翻译;buildEnd 生成 rss.xml
 └── theme/
-    ├── index.ts                   # 主题入口:继承默认主题,全局注册 12 个组件
+    ├── index.ts                   # 主题入口:继承默认主题,全局注册 9 个组件
     ├── custom.css                 # 设计令牌 --zzh-*(蓝灰 #4f7dba / 圆角 8/14/18 / 轻阴影)
     │                              #   暗色模式、reduced-motion、学习历程样式
     ├── posts.data.ts              # 文章数据加载器:dateText 格式 2026.08.30
     ├── data/
     │   ├── projects.ts            # 项目数据(name / positioning / category Study|Personal)
-    │   ├── learning.ts            # 首页「当前学习」数据
-    │   └── journey.ts             # 首页「学习历程」数据
+    │   └── journey.ts             # 学习历程数据(用于关于页)
     └── components/
-        ├── HeroSection.vue        # Hero:你好,我是 ZZH(真实学生定位,v3 #8)
-        ├── SocialLinks.vue        # 社交图标(GitHub · RSS,v3 #44)
+        ├── HeroSection.vue        # 大 Hero:博客定位 + 浏览文章/关于我 CTA
         ├── PostItem.vue           # 文章项(日期 / 标题 / 中文标签行)
         ├── LatestPosts.vue        # 首页「最新文章」(查看全部)
         ├── PostsList.vue          # 文章页:中文分类过滤(hash 路由)+ 年份归档
         ├── ProjectCard.vue        # 项目卡片(name / positioning / status / tags)
         ├── ProjectsList.vue       # 项目页:学习项目 / 个人项目 分组
         ├── FeaturedProjects.vue   # 首页「精选项目」
-        ├── CurrentFocus.vue       # 首页「当前学习」(01/02/03 编号)
-        ├── LearningJourney.vue    # 首页「学习历程」(时间线,v3 #14)
-        ├── AboutPreview.vue       # 首页「关于我」预览
+        ├── LearningJourney.vue    # 学习历程时间线(用于关于页,v3 #14)
         └── SiteFooter.vue         # 页脚:ZZH-Blog · 记录学习 · 分享技术 · 持续成长
 ```
 
@@ -66,8 +62,8 @@ ZZH-Blog/
 | 项目品牌化:苍穹外卖→FoodFlow、黑马点评→LocalHub、小哈书→Echo,必须标注学习项目来源,禁止包装为完全原创 | v3 #3 |
 | base 固定 `/ZZH-Blog/`(与仓库名一致,含大小写),所有资源引用经 `withBase()` | v3 #21 |
 | 分类过滤内置于文章页,标签使用中文 | v3 #6/#17 |
-| 首页模块:最新文章 / 精选项目 / 当前学习 / 学习历程 / 关于我 | v3 #7/#11-#14 |
-| 文章列表用 文本+分割线+轻 Hover;卡片仅用于项目/当前学习/关于预览 | v3 #25 |
+| 首页 = 技术博客首页:大 Hero(浏览文章 / 关于我)→ 最新文章 → 精选项目;个人信息统一收敛到关于页 | 用户 2026.09 首页改造需求 |
+| 文章列表用 文本+分割线+轻 Hover;卡片仅用于项目 | v3 #25 |
 | 设计令牌 `--zzh-*` 蓝灰色系;暗色不纯黑、保持层次 | v3 #24/#27 |
 | RSS 构建期生成,含标题/链接/发布时间/摘要 | v3 #30 |
 
