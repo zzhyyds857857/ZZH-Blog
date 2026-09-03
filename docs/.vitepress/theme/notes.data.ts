@@ -6,6 +6,8 @@ export interface Note {
   url: string
   date: string
   dateText: string
+  /** 短日期(月.日),用于首页学习随笔列表 */
+  dateShort: string
   /** frontmatter description,用作随笔摘要(纯文本) */
   description?: string
 }
@@ -18,6 +20,13 @@ function formatDate(date: Date): string {
   const month = String(d.getMonth() + 1).padStart(2, '0')
   const day = String(d.getDate()).padStart(2, '0')
   return `${d.getFullYear()}.${month}.${day}`
+}
+
+function formatShortDate(date: Date): string {
+  const d = new Date(date)
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${month}.${day}`
 }
 
 export default createContentLoader('notes/**/*.md', {
@@ -39,6 +48,7 @@ export default createContentLoader('notes/**/*.md', {
           url,
           date: date.toISOString(),
           dateText: formatDate(date),
+          dateShort: formatShortDate(date),
           description: fm.description
         }
       })

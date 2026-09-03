@@ -42,10 +42,6 @@
 
   /* ---- 首页两栏布局 ---- */
   --zzh-aside-width: 280px;
-  --zzh-max-width-lg: 1080px;
-
-  /* ---- 首页两栏布局 ---- */
-  --zzh-aside-width: 280px;
 
   /* ---- VitePress 变量映射(保持默认主题行为一致) ---- */
   --vp-c-brand-1: var(--zzh-primary);
@@ -106,9 +102,20 @@
   border-top: 1px solid var(--zzh-border);
 }
 
+/* 桌面端侧栏吸顶,滚动文章时保持可见 */
+.home-aside {
+  position: sticky;
+  top: 88px;
+}
+
 @media (max-width: 959px) {
   .home-body {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* 移动端单栏,侧栏取消吸顶 */
+  .home-aside {
+    position: static;
   }
 }
 
@@ -223,19 +230,6 @@
   color: var(--zzh-text-secondary);
 }
 
-.section-subtitle {
-  margin: var(--zzh-space-1) 0 0;
-  font-size: 14px;
-  color: var(--zzh-text-secondary);
-}
-
-.page-subtitle {
-  margin: 0 0 var(--zzh-space-6);
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--zzh-text-secondary);
-}
-
 .view-all {
   font-size: 14px;
   color: var(--zzh-text-secondary);
@@ -292,18 +286,6 @@
 }
 
 .post-desc {
-  margin-bottom: var(--zzh-space-2);
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--zzh-text-secondary);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.post-desc {
-  display: block;
   margin-bottom: var(--zzh-space-2);
   font-size: 14px;
   line-height: 1.6;
@@ -484,186 +466,6 @@
 
 .projects-page .project-grid {
   grid-template-columns: 1fr;
-}
-
-/* ===================== 首页侧边栏(轻量信息栏,辅助不抢主内容) ===================== */
-.side-card {
-  padding: var(--zzh-space-4) var(--zzh-space-4);
-  border: 1px solid var(--zzh-border);
-  border-radius: var(--zzh-radius-md);
-  background-color: var(--zzh-surface);
-}
-
-.side-card + .side-card {
-  margin-top: var(--zzh-space-4);
-}
-
-.side-card-title {
-  margin: 0 0 var(--zzh-space-3);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--zzh-text);
-}
-
-/* 关于我 */
-.about-card-name {
-  margin: 0 0 var(--zzh-space-1);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--zzh-text);
-}
-
-.about-card-desc {
-  margin: 0 0 var(--zzh-space-3);
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--zzh-text-secondary);
-}
-
-.about-card-github {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--zzh-primary);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.about-card-github:hover {
-  opacity: 0.8;
-}
-
-/* 分类专栏 */
-.category-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.category-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--zzh-space-2) 0;
-  font-size: 14px;
-  color: var(--zzh-text-secondary);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.category-item:hover {
-  color: var(--zzh-primary);
-}
-
-.category-item .category-count {
-  font-size: 12px;
-  color: var(--zzh-text-tertiary);
-  font-variant-numeric: tabular-nums;
-}
-
-/* 精选项目(侧栏简化版) */
-.project-link-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.project-link-list li + li .project-link-item {
-  border-top: 1px solid var(--zzh-border);
-}
-
-.project-link-item {
-  display: block;
-  padding: var(--zzh-space-2) 0;
-  text-decoration: none;
-}
-
-.project-link-name {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--zzh-text);
-  transition: color 0.2s ease;
-}
-
-.project-link-item:hover .project-link-name {
-  color: var(--zzh-primary);
-}
-
-.project-link-desc {
-  display: block;
-  margin-top: 2px;
-  font-size: 12px;
-  color: var(--zzh-text-tertiary);
-}
-
-/* ===================== 学习随笔(轻时间线) ===================== */
-.note-list {
-  list-style: none;
-  margin: 0;
-  padding: 0 0 0 var(--zzh-space-4);
-  border-left: 1px solid var(--zzh-border);
-}
-
-.note-item {
-  position: relative;
-}
-
-.note-item::before {
-  content: '';
-  position: absolute;
-  top: 0.9em;
-  left: calc(-1 * var(--zzh-space-4) - 4px);
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: var(--zzh-primary-soft);
-  border: 1px solid var(--zzh-primary);
-}
-
-.note-item-link {
-  display: block;
-  padding: var(--zzh-space-3) 0 var(--zzh-space-4);
-  text-decoration: none;
-}
-
-.note-date {
-  display: block;
-  margin-bottom: var(--zzh-space-1);
-  font-size: 13px;
-  color: var(--zzh-text-tertiary);
-  font-variant-numeric: tabular-nums;
-}
-
-.note-title {
-  display: block;
-  margin-bottom: var(--zzh-space-1);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.5;
-  color: var(--zzh-text);
-  transition: color 0.2s ease;
-}
-
-.note-item-link:hover .note-title {
-  color: var(--zzh-primary);
-}
-
-.note-desc {
-  display: block;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--zzh-text-secondary);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ===================== 学习随笔页 ===================== */
-.notes-page {
-  max-width: var(--zzh-max-width);
-  margin: 0 auto;
-  padding: var(--zzh-space-12) var(--zzh-space-6);
 }
 
 /* ===================== 首页侧边栏(轻量信息栏,辅助不抢主内容) ===================== */

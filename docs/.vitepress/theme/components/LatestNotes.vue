@@ -17,7 +17,7 @@ withDefaults(defineProps<{ limit?: number }>(), { limit: 3 })
     <ul class="note-list">
       <li v-for="note in notes.slice(0, limit)" :key="note.url" class="note-item">
         <a class="note-item-link" :href="withBase(note.url)">
-          <span class="note-date">{{ note.dateText }}</span>
+          <span class="note-date">{{ note.dateShort }}</span>
           <span class="note-title">{{ note.title }}</span>
           <span v-if="note.description" class="note-desc">{{ note.description }}</span>
         </a>
