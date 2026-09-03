@@ -6,6 +6,7 @@ import './custom.css'
 import HeroSection from './components/HeroSection.vue'
 import PostItem from './components/PostItem.vue'
 import LatestPosts from './components/LatestPosts.vue'
+import LatestPostsHeader from './components/LatestPostsHeader.vue'
 import PostsList from './components/PostsList.vue'
 import ProjectCard from './components/ProjectCard.vue'
 import ProjectsList from './components/ProjectsList.vue'
@@ -29,6 +30,7 @@ export default {
     app.component('HeroSection', HeroSection)
     app.component('PostItem', PostItem)
     app.component('LatestPosts', LatestPosts)
+    app.component('LatestPostsHeader', LatestPostsHeader)
     app.component('PostsList', PostsList)
     app.component('ProjectCard', ProjectCard)
     app.component('ProjectsList', ProjectsList)

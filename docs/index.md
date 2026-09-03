@@ -8,6 +8,8 @@ footer: false
 
 <HeroSection />
 
+<LatestPostsHeader />
+
 <div class="home-body">
   <div class="home-main">
     <LatestPosts :limit="5" />

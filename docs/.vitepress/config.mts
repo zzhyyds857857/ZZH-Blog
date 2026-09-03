@@ -22,7 +22,7 @@ export default defineConfig({
   base,
   ignoreDeadLinks: false,
   head: [
-    ['meta', { name: 'theme-color', content: '#4f7dba' }],
+    ['meta', { name: 'theme-color', content: '#7186e6' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: siteTitle, href: `${base}rss.xml` }],
     ['meta', { property: 'og:title', content: siteTitle }],
     ['meta', { property: 'og:description', content: siteDescription }],
@@ -30,7 +30,9 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    siteTitle,
+    // 站名仅用于 SEO/RSS;导航左侧只展示 Logo 图片(Logo 已含 ZZH-Blog 字样,不重复文字)
+    siteTitle: '',
+    logo: '/logo.png',
     nav: [
       { text: '首页', link: '/' },
       { text: '文章', link: '/posts/' },
