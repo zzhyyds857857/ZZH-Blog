@@ -7,7 +7,8 @@
   /* ---- 设计令牌(ZZH Blog Skill v2.0 #27) ---- */
   --zzh-bg: #f7f8fa;
   --zzh-surface: #ffffff;
-  --zzh-text: #1f2937;
+  --zzh-text: #111827;
+  --zzh-text-body: #374151;
   --zzh-text-secondary: #6b7280;
   --zzh-text-tertiary: #9ca3af;
   --zzh-primary: #4f7dba;
@@ -15,7 +16,7 @@
   --zzh-border: #e5e7eb;
 
   --zzh-radius-sm: 8px;
-  --zzh-radius-md: 14px;
+  --zzh-radius-md: 12px;
   --zzh-radius-lg: 18px;
 
   --zzh-shadow-soft: 0 8px 30px rgb(31 41 55 / 6%);
@@ -30,6 +31,7 @@
   --zzh-space-12: 48px;
   --zzh-space-16: 64px;
   --zzh-space-20: 80px;
+  --zzh-space-24: 96px;
 
   /* ---- CTA 主按钮(暗色下用深色文字保证对比度) ---- */
   --zzh-btn-solid-bg: var(--zzh-primary);
@@ -53,6 +55,7 @@
   --vp-c-text-3: var(--zzh-text-tertiary);
   --vp-c-border: var(--zzh-border);
   --vp-c-gutter: var(--zzh-border);
+  --vp-nav-bg-color: rgb(255 255 255 / 78%);
   --vp-c-bg: var(--zzh-bg);
   --vp-c-bg-soft: #eef1f5;
   --vp-c-bg-alt: var(--zzh-surface);
@@ -63,6 +66,7 @@
   --zzh-bg: #10151c;
   --zzh-surface: #171e27;
   --zzh-text: #e5e7eb;
+  --zzh-text-body: #d1d5db;
   --zzh-text-secondary: #9aa4b2;
   --zzh-text-tertiary: #6b7686;
   --zzh-primary: #7ba3cd;
@@ -80,6 +84,7 @@
   --vp-c-bg: var(--zzh-bg);
   --vp-c-bg-soft: #1a222d;
   --vp-c-bg-alt: var(--zzh-surface);
+  --vp-nav-bg-color: rgb(16 21 28 / 78%);
 }
 
 /* ===================== 首页容器 ===================== */
@@ -89,6 +94,20 @@
   margin: 0 auto;
   /* 大 Hero 自带上下留白,容器不再额外加 padding-top */
   padding: 0 var(--zzh-space-6) var(--zzh-space-8);
+}
+
+/* 首页视觉分区:白(Hero+文章)→ 浅灰(随笔),形成呼吸感 */
+.home-band-light {
+  background-color: var(--zzh-surface);
+}
+
+.home-band-muted {
+  background-color: var(--zzh-bg);
+}
+
+.home-band-muted .home-section {
+  margin-top: 0;
+  border-top: none;
 }
 
 /* 两栏主体:左侧文章为主,右侧轻量信息栏为辅 */
@@ -141,23 +160,23 @@
 
 @media (min-width: 960px) {
   .hero {
-    padding: var(--zzh-space-20) 0;
+    padding: var(--zzh-space-24) 0;
   }
 }
 
 .hero-title {
   margin: 0 0 var(--zzh-space-4);
-  font-size: clamp(30px, 5vw, 46px);
-  line-height: 1.25;
+  font-size: clamp(34px, 5.5vw, 50px);
+  line-height: 1.2;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: var(--zzh-text);
 }
 
 .hero-description {
   margin: 0 auto var(--zzh-space-8);
   max-width: 560px;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.75;
   color: var(--zzh-text-secondary);
 }
@@ -170,6 +189,33 @@
   gap: var(--zzh-space-3);
 }
 
+/* Hero 入场:轻微淡入 + 上移,一次性,不循环 */
+.hero-title,
+.hero-description,
+.hero-actions {
+  animation: hero-rise 0.6s ease-out both;
+}
+
+.hero-description {
+  animation-delay: 0.12s;
+}
+
+.hero-actions {
+  animation-delay: 0.24s;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero-btn {
   display: inline-flex;
   align-items: center;
@@ -179,7 +225,7 @@
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .hero-btn-solid {
@@ -189,6 +235,7 @@
 
 .hero-btn-solid:hover {
   background-color: var(--zzh-btn-solid-hover);
+  transform: translateY(-1px);
 }
 
 .hero-btn-outline {
@@ -200,6 +247,7 @@
   border-color: var(--zzh-primary);
   color: var(--zzh-primary);
   background-color: var(--zzh-primary-soft);
+  transform: translateY(-1px);
 }
 
 /* ===================== Section Header ===================== */
@@ -212,7 +260,7 @@
 
 .section-title {
   margin: 0;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--zzh-text);
 }
@@ -225,7 +273,7 @@
 
 .page-subtitle {
   margin: 0 0 var(--zzh-space-6);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.7;
   color: var(--zzh-text-secondary);
 }
@@ -252,6 +300,11 @@
   padding: var(--zzh-space-4) 0;
   border-bottom: 1px solid var(--zzh-border);
   text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.post-item-link:hover {
+  border-bottom-color: var(--zzh-primary-soft);
 }
 
 .post-list > .post-item:last-child .post-item-link {
@@ -269,15 +322,32 @@
 .post-title {
   display: block;
   margin-bottom: var(--zzh-space-2);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.5;
   color: var(--zzh-text);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .post-item-link:hover .post-title {
   color: var(--zzh-primary);
+  transform: translateX(4px);
+}
+
+/* 箭头默认隐藏,hover 淡入(纯装饰,不进入无障碍树) */
+.post-title::after {
+  content: '→';
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--zzh-primary);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.post-item-link:hover .post-title::after {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .post-tags {
@@ -564,11 +634,12 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--zzh-text);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .project-link-item:hover .project-link-name {
   color: var(--zzh-primary);
+  transform: translateX(3px);
 }
 
 .project-link-desc {
@@ -600,6 +671,10 @@
   border-radius: 50%;
   background-color: var(--zzh-primary-soft);
   border: 1px solid var(--zzh-primary);
+}
+
+.note-item:hover::before {
+  background-color: var(--zzh-primary);
 }
 
 .note-item-link {
@@ -702,6 +777,7 @@
   margin: 0 auto;
   padding: var(--zzh-space-8) var(--zzh-space-6) var(--zzh-space-12);
   border-top: 1px solid var(--zzh-border);
+  background-color: var(--zzh-bg);
   text-align: center;
 }
 
@@ -736,8 +812,28 @@
 
 /* ===================== 文章详情页阅读体验(v2 #26) ===================== */
 .vp-doc {
+  color: var(--zzh-text-body);
   --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* ===================== Header 毛玻璃(半透明 + 轻模糊 + 极淡阴影) ===================== */
+.VPNavBar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 8px rgb(15 23 42 / 4%);
+}
+
+.dark .VPNavBar {
+  box-shadow: 0 1px 8px rgb(0 0 0 / 20%);
+}
+
+.VPNavBar .divider-line {
+  background-color: rgb(15 23 42 / 6%);
+}
+
+.dark .VPNavBar .divider-line {
+  background-color: rgb(255 255 255 / 6%);
 }
 
 /* ===================== 导航栏微调 ===================== */

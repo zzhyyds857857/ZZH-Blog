@@ -3,7 +3,8 @@ layout: page
 footer: false
 ---
 
-<div class="home-content">
+<div class="home-band home-band-light">
+  <div class="home-content">
 
 <HeroSection />
 
@@ -18,6 +19,13 @@ footer: false
   </aside>
 </div>
 
+  </div>
+</div>
+
+<div class="home-band home-band-muted">
+  <div class="home-content">
+
 <LatestNotes :limit="3" />
 
+  </div>
 </div>
