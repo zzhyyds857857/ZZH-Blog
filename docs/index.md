@@ -12,7 +12,7 @@ footer: false
 
 <div class="home-body">
   <div class="home-main">
-    <LatestPosts :limit="5" />
+    <LatestPosts :limit="6" />
   </div>
   <aside class="home-aside">
     <AboutCard />

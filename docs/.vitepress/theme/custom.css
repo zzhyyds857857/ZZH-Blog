@@ -148,8 +148,10 @@
   padding-top: var(--zzh-space-8);
 }
 
-/* 全宽标题行:与 Hero 之间保持原有节奏 */
-.home-latest-header {
+/* 全宽标题行:与 Hero 之间保持原有节奏,标题与查看全部垂直居中同排 */
+.section-header.home-latest-header {
+  align-items: center;
+  min-height: 44px;
   padding-top: var(--zzh-space-8);
 }
 
@@ -197,7 +199,7 @@
 }
 
 /* 唯一的空间光晕:顶部大片极浅蓝向下渐隐,像一个整体,不形成多个独立光斑;
-   文字所在中部已衰减到接近纯白 */
+   文字所在中部已衰减到接近纯白。不用任何图案、圆环与纹理 */
 .hero::before {
   content: '';
   position: absolute;
@@ -211,32 +213,12 @@
   );
 }
 
-/* 极淡空间轨迹:单一圆环 + 一圈柔和外扩光晕,被 Hero 裁剪出弧线 */
-.hero::after {
-  content: '';
-  position: absolute;
-  top: -200px;
-  left: 50%;
-  transform: translateX(4%);
-  width: 560px;
-  height: 560px;
-  border: 1px solid rgb(113 134 230 / 8%);
-  border-radius: 50%;
-  box-shadow: 0 0 0 90px rgb(113 134 230 / 3%);
-  pointer-events: none;
-}
-
 .dark .hero::before {
   background: radial-gradient(
     62% 58% at 50% 0%,
     rgb(139 156 255 / 6%),
     transparent 78%
   );
-}
-
-.dark .hero::after {
-  border-color: rgb(139 156 255 / 6%);
-  box-shadow: 0 0 0 90px rgb(139 156 255 / 2%);
 }
 
 /* 文字内容在装饰层之上 */
@@ -263,13 +245,22 @@
   color: var(--zzh-text-secondary);
 }
 
-/* 按钮下方的技术方向:纯文字,禁止卡片/pill/图标 */
+/* 技术方向 + 品牌口号:两行纯文字,禁止卡片/pill/图标 */
 .hero-tags {
   margin: 18px 0 0;
   font-size: 12.5px;
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--zzh-text-tertiary);
+}
+
+.hero-motto {
+  margin: 6px 0 0;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--zzh-text-tertiary);
+  opacity: 0.85;
 }
 
 .hero-actions {
@@ -284,7 +275,8 @@
 .hero-title,
 .hero-description,
 .hero-actions,
-.hero-tags {
+.hero-tags,
+.hero-motto {
   animation: hero-rise 0.6s ease-out both;
 }
 
@@ -300,15 +292,16 @@
   animation-delay: 0.32s;
 }
 
+.hero-motto {
+  animation-delay: 0.38s;
+}
+
 @keyframes hero-rise {
+  /* 只声明起始帧:结束帧回退到元素自然样式,
+     避免动画 fill 覆盖元素自身的 opacity(如 hero-motto 的淡色) */
   from {
     opacity: 0;
     transform: translateY(14px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -428,7 +421,7 @@
 
 .post-item-link {
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   padding: 22px 24px;
   background-color: var(--zzh-surface);
   border: 1px solid var(--zzh-border);
@@ -457,7 +450,7 @@
 .post-date {
   display: block;
   margin-bottom: var(--zzh-space-1);
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--zzh-text-tertiary);
   font-variant-numeric: tabular-nums;
@@ -507,7 +500,7 @@
   border-radius: 999px;
   background-color: var(--zzh-primary-soft);
   color: var(--zzh-primary);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 500;
   line-height: 1.6;
 }
@@ -578,7 +571,7 @@
 }
 
 .category-count {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--zzh-text-tertiary);
 }
 
@@ -744,7 +737,7 @@
 
 .about-card-desc {
   margin: 0 0 var(--zzh-space-3);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.7;
   color: var(--zzh-text-secondary);
 }
@@ -787,7 +780,7 @@
 }
 
 .category-item .category-count {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--zzh-text-tertiary);
   font-variant-numeric: tabular-nums;
 }
@@ -828,7 +821,7 @@
 .project-link-desc {
   display: block;
   margin-top: 2px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--zzh-text-tertiary);
 }
 
@@ -977,7 +970,7 @@
 
 .site-footer-sub {
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--zzh-text-tertiary);
 }
 
@@ -1036,25 +1029,15 @@
   background-color: rgb(255 255 255 / 6%);
 }
 
-/* Logo:严格等比缩放,不做任何图像处理
-   亮色下 multiply 让白底自然融入毛玻璃;
-   暗色下白底 PNG 无法反色处理,改为垫白色圆角小底板(轻微视觉兼容,保持原图完整可读) */
+/* Logo:透明底 PNG,等比缩放原色显示,亮暗两色通用,不做任何图像处理 */
 .VPNavBarTitle .logo {
   width: auto;
   margin-right: var(--zzh-space-2);
-  mix-blend-mode: multiply;
-}
-
-.dark .VPNavBarTitle .logo {
-  mix-blend-mode: normal;
-  background-color: rgb(255 255 255 / 92%);
-  padding: 3px 10px;
-  border-radius: 8px;
 }
 
 @media (max-width: 639px) {
   :root {
-    --vp-nav-logo-height: 30px;
+    --vp-nav-logo-height: 28px;
   }
 }
 

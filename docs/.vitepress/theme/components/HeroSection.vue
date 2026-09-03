@@ -16,5 +16,6 @@ import { withBase } from 'vitepress'
       <a class="hero-btn hero-btn-outline" :href="withBase('/about')">关于我</a>
     </div>
     <p class="hero-tags">Java 后端 · 微服务 · Redis · 数据库 · 前端探索</p>
+    <p class="hero-motto">持续记录 · 持续实践 · 持续成长</p>
   </section>
 </template>
