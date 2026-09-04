@@ -19,7 +19,6 @@
   --zzh-primary-soft: #eff3ff;
   --zzh-border: rgb(218 228 241 / 90%);
   --zzh-divider: #edf0f5;
-  --zzh-note-line: #dce4f2;
 
   /* 圆角:小控件 10 / 卡片 16 / 大型卡片 18 */
   --zzh-radius-sm: 10px;
@@ -89,7 +88,6 @@
   --zzh-primary-soft: rgb(139 156 255 / 14%);
   --zzh-border: rgb(53 64 87 / 88%);
   --zzh-divider: #232c40;
-  --zzh-note-line: rgb(53 64 87 / 88%);
 
   --zzh-shadow-soft: 0 10px 30px rgb(0 0 0 / 22%), 0 2px 6px rgb(0 0 0 / 12%);
   --zzh-shadow-soft-hover: 0 16px 38px rgb(0 0 0 / 28%);
@@ -116,14 +114,21 @@
   padding: 0 var(--zzh-space-6) var(--zzh-space-8);
 }
 
-/* 全站统一背景图:极轻白/深色均匀遮罩保证可读性(linear-gradient 两端同色,
-   仅作遮罩层,不是视觉渐变);fixed 避免滚动时背景跳动 */
+/* 全站海洋背景图:顶部重遮罩保证正文可读,向下渐透,视口底部露出海面与海平线
+   (天空 → 渐变 → 海面 纵向视觉);fixed 锚定视口,Footer 滚入视口底部时正落在海面上;
+   移动端(iOS)不支持 fixed 时自动回退 scroll,均匀遮罩仍保证可读性 */
 body {
   background-color: var(--zzh-bg);
-  background-image: linear-gradient(rgb(246 249 253 / 86%), rgb(246 249 253 / 86%)),
+  background-image: linear-gradient(
+      180deg,
+      rgb(245 249 255 / 84%) 0%,
+      rgb(245 249 255 / 74%) 45%,
+      rgb(235 244 252 / 55%) 78%,
+      rgb(215 233 245 / 24%) 100%
+    ),
     url('../../public/background.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -708,32 +713,11 @@ body {
   color: var(--zzh-text-tertiary);
 }
 
-/* ===================== 学习随笔(轻时间线) ===================== */
+/* ===================== 学习随笔(首页轻列表,无时间轴装饰) ===================== */
 .note-list {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 var(--zzh-space-4);
-  border-left: 1px solid var(--zzh-note-line);
-}
-
-.note-item {
-  position: relative;
-}
-
-.note-item::before {
-  content: '';
-  position: absolute;
-  top: 0.9em;
-  left: calc(-1 * var(--zzh-space-4) - 5px);
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background-color: var(--zzh-surface);
-  border: 2px solid var(--zzh-primary);
-}
-
-.note-item:hover::before {
-  background-color: var(--zzh-primary);
+  padding: 0;
 }
 
 .note-item-link {
@@ -799,15 +783,15 @@ body {
   margin-bottom: 0;
 }
 
-/* 便签纸:直角、暖边框、极轻阴影,纸张感而不做真便利贴 */
+/* 随笔卡片:与首页文章卡片同一设计系统(surface + 统一边框/圆角/阴影) */
 .note-sheet {
   display: block;
   margin-bottom: var(--zzh-space-5);
   padding: 24px 28px;
   background-color: var(--zzh-surface);
-  border: 1px solid #e8dfc9;
-  border-radius: 0;
-  box-shadow: 0 2px 8px rgb(120 108 70 / 6%);
+  border: 1px solid var(--zzh-border);
+  border-radius: var(--zzh-radius-lg);
+  box-shadow: var(--zzh-shadow-soft);
   text-decoration: none;
   transform: translateZ(0);
   transition: box-shadow 220ms ease, border-color 220ms ease;
@@ -817,10 +801,10 @@ body {
   display: block;
   margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e5ddcb;
+  border-bottom: 1px solid var(--zzh-divider);
   font-size: 13px;
   font-weight: 400;
-  color: #71809a;
+  color: var(--zzh-text-tertiary);
   font-variant-numeric: tabular-nums;
 }
 
@@ -831,7 +815,7 @@ body {
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: -0.015em;
-  color: #253047;
+  color: var(--zzh-text);
   transition: color 0.2s ease;
 }
 
@@ -840,25 +824,6 @@ body {
   font-size: 14.5px;
   font-weight: 400;
   line-height: 1.75;
-  color: #526078;
-}
-
-.dark .note-sheet {
-  background-color: var(--zzh-surface);
-  border-color: var(--zzh-border);
-  box-shadow: var(--zzh-shadow-soft);
-}
-
-.dark .note-sheet-date {
-  border-bottom-color: var(--zzh-divider);
-  color: var(--zzh-text-tertiary);
-}
-
-.dark .note-sheet-title {
-  color: var(--zzh-text);
-}
-
-.dark .note-sheet-desc {
   color: var(--zzh-text-secondary);
 }
 
@@ -868,7 +833,7 @@ body {
   }
 }
 
-/* ===================== 学习随笔详情(浅黄色便签纸容器) ===================== */
+/* ===================== 学习随笔详情(居中卡片容器,统一设计系统) ===================== */
 /* frontmatter pageClass: note-detail 挂在 Layout 根元素上;
    主题 .VPDoc .content 上限 752/784px(含 64px padding),放宽到 944px 才能让正文容器达到 880px */
 .note-detail .VPDoc.VPDoc .content {
@@ -885,15 +850,8 @@ body {
   margin: 0 auto var(--zzh-space-4);
   padding: 48px 44px;
   background-color: var(--zzh-surface);
-  border: 1px solid #e5ddcb;
-  border-radius: 6px;
-  box-shadow: 0 3px 12px rgb(120 108 70 / 7%);
-  color: #4f5d70;
-}
-
-.dark .note-detail .vp-doc {
-  background-color: var(--zzh-surface);
-  border-color: var(--zzh-border);
+  border: 1px solid var(--zzh-border);
+  border-radius: var(--zzh-radius-lg);
   box-shadow: var(--zzh-shadow-soft);
   color: var(--zzh-text-body);
 }
@@ -913,16 +871,11 @@ body {
 .note-detail-date {
   margin: 0 0 var(--zzh-space-6);
   padding-bottom: var(--zzh-space-4);
-  border-bottom: 1px solid #e5ddcb;
+  border-bottom: 1px solid var(--zzh-divider);
   font-size: 14px;
   font-weight: 400;
-  color: #71809a;
-  font-variant-numeric: tabular-nums;
-}
-
-.dark .note-detail-date {
-  border-bottom-color: var(--zzh-divider);
   color: var(--zzh-text-tertiary);
+  font-variant-numeric: tabular-nums;
 }
 
 /* 详情正文阅读排版:标题层级(段落行高由全局 .vp-doc p 提供) */
@@ -931,10 +884,6 @@ body {
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: -0.02em;
-  color: #253047;
-}
-
-.dark .note-detail .vp-doc .note-detail-title {
   color: var(--zzh-text);
 }
 
@@ -977,8 +926,8 @@ body {
 
 .doc-nav-label {
   font-size: 12px;
-  font-weight: 400;
-  color: var(--zzh-text-tertiary);
+  font-weight: 500;
+  color: var(--zzh-text-secondary);
 }
 
 .doc-nav-title {
@@ -987,7 +936,7 @@ body {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5;
   color: var(--zzh-text-body);
   transition: color 0.2s ease;
@@ -1013,35 +962,6 @@ body {
 .doc-nav-btn.is-disabled {
   opacity: 0.55;
   cursor: default;
-}
-
-/* 学习随笔详情:底部按钮改白色系,与文章详情一致 */
-.note-detail .doc-nav-btn {
-  background-color: var(--zzh-surface);
-  border-color: #e4ddcc;
-}
-
-.note-detail .doc-nav-label {
-  color: #71809a;
-}
-
-.note-detail .doc-nav-title,
-.note-detail .doc-nav-back {
-  color: #526078;
-}
-
-.dark .doc-nav-btn {
-  background-color: var(--zzh-surface);
-  border-color: var(--zzh-border);
-}
-
-.dark .doc-nav-title,
-.dark .doc-nav-back {
-  color: var(--zzh-text-body);
-}
-
-.dark .doc-nav-label {
-  color: var(--zzh-text-tertiary);
 }
 
 @media (max-width: 639px) {
@@ -1121,17 +1041,18 @@ body {
 .site-footer-main {
   margin: 0 0 var(--zzh-space-1);
   font-size: 13px;
-  color: var(--zzh-text-tertiary);
+  color: var(--zzh-text-body);
 }
 
 .site-footer-sub {
   margin: 0;
   font-size: 13px;
-  color: var(--zzh-text-tertiary);
+  color: var(--zzh-text-body);
 }
 
+/* Footer 位于海洋背景海面区域,文字/链接用较深正文色保证可读 */
 .site-footer a {
-  color: var(--zzh-text-secondary);
+  color: var(--zzh-text);
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -1271,8 +1192,8 @@ body {
 
   /* 学习随笔便签卡:只增强阴影与边框色,本体不位移 */
   .note-sheet:hover {
-    box-shadow: 0 6px 18px rgb(120 108 70 / 10%);
-    border-color: #d8cdb2;
+    box-shadow: var(--zzh-shadow-soft-hover);
+    border-color: rgb(113 134 230 / 35%);
   }
 
   .note-sheet:hover .note-sheet-title {

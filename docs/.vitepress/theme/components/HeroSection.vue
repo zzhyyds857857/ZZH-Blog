@@ -10,7 +10,7 @@ import { withBase } from 'vitepress'
     <p class="hero-description">专注于 Java 后端、微服务与全栈开发</p>
     <div class="hero-actions">
       <a class="hero-btn hero-btn-solid" :href="withBase('/posts/')">浏览文章</a>
-      <a class="hero-btn hero-btn-outline" :href="withBase('/about')">关于我</a>
+      <a class="hero-btn hero-btn-outline" :href="withBase('/about.html')">关于我</a>
     </div>
   </section>
 </template>

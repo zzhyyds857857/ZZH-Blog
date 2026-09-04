@@ -12,7 +12,7 @@ const featured = computed(() => projects.filter((project) => project.featured))
     <h2 class="side-card-title">精选项目</h2>
     <ul class="project-link-list">
       <li v-for="project in featured" :key="project.name">
-        <a class="project-link-item" :href="withBase('/projects')">
+        <a class="project-link-item" :href="withBase('/projects.html')">
           <span class="project-link-name">{{ project.name }}</span>
           <span class="project-link-desc">{{ project.positioning }}</span>
         </a>
