@@ -116,16 +116,28 @@
   padding: 0 var(--zzh-space-6) var(--zzh-space-8);
 }
 
-/* 全站纯色背景:Hero、文章区、随笔、Footer 共用同一块浅白蓝,
-   不使用任何渐变、光斑、图案与纹理 */
-.home-band-light,
-.dark .home-band-light {
+/* 全站统一背景图:极轻白/深色均匀遮罩保证可读性(linear-gradient 两端同色,
+   仅作遮罩层,不是视觉渐变);fixed 避免滚动时背景跳动 */
+body {
   background-color: var(--zzh-bg);
+  background-image: linear-gradient(rgb(246 249 253 / 86%), rgb(246 249 253 / 86%)),
+    url('../../public/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-/* 随笔区直接用页面主背景,顶部 48px 留白自然进入,不做独立色块 */
+.dark body {
+  background-image: linear-gradient(rgb(16 21 34 / 88%), rgb(16 21 34 / 88%)),
+    url('../../public/background.jpg');
+}
+
+/* 首页容器不再自铺背景色,直接透出全站背景图 */
+.home-band-light,
+.dark .home-band-light,
 .home-band-muted {
-  background-color: var(--zzh-bg);
+  background-color: transparent;
 }
 
 .home-band-muted .home-section {
@@ -215,15 +227,6 @@
   color: var(--zzh-text-secondary);
 }
 
-/* 按钮下方的技术方向:纯文字,禁止卡片/pill/图标 */
-.hero-tags {
-  margin: 18px 0 0;
-  font-size: 12.5px;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: var(--zzh-text-tertiary);
-}
-
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -236,8 +239,7 @@
 .hero-title,
 .hero-subtitle,
 .hero-description,
-.hero-actions,
-.hero-tags {
+.hero-actions {
   animation: hero-rise 0.6s ease-out both;
 }
 
@@ -251,10 +253,6 @@
 
 .hero-actions {
   animation-delay: 0.24s;
-}
-
-.hero-tags {
-  animation-delay: 0.32s;
 }
 
 @keyframes hero-rise {
@@ -397,17 +395,6 @@
   letter-spacing: -0.015em;
   color: var(--zzh-text);
   transition: color 0.2s ease;
-}
-
-/* 箭头常驻占位、默认透明(hover 淡入),不改变标题布局宽度 */
-.post-title::after {
-  content: '→';
-  display: inline-block;
-  margin-left: 8px;
-  color: var(--zzh-primary);
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 /* 标签:浅蓝底 pill */
@@ -833,7 +820,7 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background-color: var(--zzh-bg);
+  background-color: var(--zzh-surface);
   border: 2px solid var(--zzh-primary);
 }
 
@@ -843,7 +830,7 @@
   padding: 20px 24px;
   background-color: var(--zzh-surface);
   border: 1px solid var(--zzh-border);
-  border-radius: var(--zzh-radius-lg);
+  border-radius: 6px;
   box-shadow: var(--zzh-shadow-soft);
   text-decoration: none;
   transform: translateZ(0);
@@ -856,7 +843,9 @@
 
 .note-card-date {
   display: block;
-  margin-bottom: var(--zzh-space-1);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--zzh-note-line);
   font-size: 13px;
   font-weight: 400;
   color: var(--zzh-text-tertiary);
@@ -901,12 +890,12 @@
 
 .note-detail .vp-doc {
   max-width: 780px;
-  margin: 0 auto var(--zzh-space-12);
+  margin: 0 auto var(--zzh-space-10);
   padding: 36px 40px;
   background-color: var(--zzh-surface);
   border: 1px solid var(--zzh-border);
-  border-radius: 20px;
-  box-shadow: var(--zzh-shadow-soft);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgb(42 58 82 / 5%);
   /* 详情正文阅读排版:16px / 1.85,标题 600 不过重 */
   color: var(--zzh-text-body);
   font-size: 16px;
@@ -921,16 +910,6 @@
   .note-detail .vp-doc {
     padding: 24px 20px;
   }
-}
-
-.note-back-link {
-  display: inline-block;
-  margin-bottom: var(--zzh-space-4);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--zzh-text-secondary);
-  text-decoration: none;
-  transition: color 0.2s ease;
 }
 
 .note-detail-date {
@@ -964,6 +943,81 @@
 .note-detail .vp-doc h3 {
   font-size: 19px;
   font-weight: 600;
+}
+
+/* ===================== 详情页底部导航(三按钮) ===================== */
+/* 由 DocFooterNav 组件渲染于 doc-bottom 插槽,文章与学习随笔详情共用;
+   hover 只改颜色/阴影,无 transform,不改变布局尺寸 */
+.doc-footer-nav {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--zzh-space-3);
+  margin: 0 auto var(--zzh-space-10);
+}
+
+.doc-nav-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  max-width: 300px;
+  padding: 10px 20px;
+  background-color: var(--zzh-surface);
+  border: 1px solid var(--zzh-border);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+
+.doc-nav-side {
+  min-width: 200px;
+}
+
+.doc-nav-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--zzh-text-tertiary);
+}
+
+.doc-nav-title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--zzh-text);
+  transition: color 0.2s ease;
+}
+
+/* 中间按钮:主要返回入口,实心主色 */
+.doc-nav-back {
+  align-items: center;
+  text-align: center;
+  background-color: var(--zzh-btn-solid-bg);
+  border-color: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.doc-nav-btn.is-disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+@media (max-width: 639px) {
+  .doc-footer-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .doc-nav-side {
+    max-width: none;
+  }
 }
 
 /* ===================== 学习历程(用于关于页,v3 #14) ===================== */
@@ -1129,11 +1183,6 @@
     color: var(--zzh-primary);
   }
 
-  .post-item-link:hover .post-title::after {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
   /* 侧栏/项目卡:只增强阴影 */
   .side-card:hover {
     box-shadow: var(--zzh-shadow-soft-hover);
@@ -1186,8 +1235,19 @@
     color: var(--zzh-primary);
   }
 
-  .note-back-link:hover {
+  /* 详情页底部导航:只改颜色与阴影 */
+  .doc-nav-side:hover {
+    border-color: rgb(113 134 230 / 30%);
+    box-shadow: var(--zzh-shadow-soft-hover);
+  }
+
+  .doc-nav-side:hover .doc-nav-title {
     color: var(--zzh-primary);
+  }
+
+  .doc-nav-back:hover {
+    background-color: var(--zzh-btn-solid-hover);
+    box-shadow: 0 8px 20px rgb(113 136 216 / 20%);
   }
 
   .hero-btn-solid:hover {

@@ -3,7 +3,7 @@ import { withBase } from 'vitepress'
 </script>
 
 <template>
-  <!-- Hero 克制原则:标题 + 副标题 + 一行定位 + 按钮 + 一行技术方向,不再增加任何文案 -->
+  <!-- Hero 克制原则:标题 + 副标题 + 一行定位 + 按钮,不加浅灰小字 -->
   <section class="hero">
     <h1 class="hero-title">欢迎来到我的个人博客</h1>
     <p class="hero-subtitle">技术分享与成长记录</p>
@@ -12,6 +12,5 @@ import { withBase } from 'vitepress'
       <a class="hero-btn hero-btn-solid" :href="withBase('/posts/')">浏览文章</a>
       <a class="hero-btn hero-btn-outline" :href="withBase('/about')">关于我</a>
     </div>
-    <p class="hero-tags">Java · Spring · Redis · MySQL · 微服务 · 前端</p>
   </section>
 </template>

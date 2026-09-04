@@ -16,6 +16,7 @@ import ProjectLinks from './components/ProjectLinks.vue'
 import LatestNotes from './components/LatestNotes.vue'
 import NotesList from './components/NotesList.vue'
 import NoteDetailHeader from './components/NoteDetailHeader.vue'
+import DocFooterNav from './components/DocFooterNav.vue'
 import LearningJourney from './components/LearningJourney.vue'
 import SiteFooter from './components/SiteFooter.vue'
 
@@ -24,7 +25,9 @@ export default {
   // 全站统一页脚:挂载在默认主题布局底部,所有页面(含文章详情页)自动渲染
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'layout-bottom': () => h(SiteFooter)
+      'layout-bottom': () => h(SiteFooter),
+      // 详情页(文章/学习随笔)底部三按钮导航,由组件按路径自判断渲染
+      'doc-bottom': () => h(DocFooterNav)
     })
   },
   enhanceApp({ app }) {

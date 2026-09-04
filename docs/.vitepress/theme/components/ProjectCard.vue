@@ -26,7 +26,7 @@ defineProps<{
         target="_blank"
         rel="noopener noreferrer"
         :aria-label="`GitHub 仓库:${name}`"
-      >GitHub →</a>
+      >GitHub</a>
     </div>
   </article>
 </template>

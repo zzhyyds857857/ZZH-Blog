@@ -7,6 +7,6 @@ import { withBase } from 'vitepress'
        使左右两列的卡片顶部在 Grid 中严格对齐 -->
   <header class="section-header home-latest-header">
     <h2 class="section-title">最新文章</h2>
-    <a class="view-all" :href="withBase('/posts/')">查看全部 →</a>
+    <a class="view-all" :href="withBase('/posts/')">查看全部</a>
   </header>
 </template>

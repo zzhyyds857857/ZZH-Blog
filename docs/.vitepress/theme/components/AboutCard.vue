@@ -16,6 +16,6 @@ import { withBase } from 'vitepress'
       href="https://github.com/zzhyyds857857"
       target="_blank"
       rel="noopener noreferrer"
-    >GitHub →</a>
+    >GitHub</a>
   </section>
 </template>

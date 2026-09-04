@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { withBase, useData } from 'vitepress'
+import { useData } from 'vitepress'
 
-// 学习随笔详情页头部:返回入口 + 标题 + 日期(信息来自笔记 frontmatter)
+// 学习随笔详情页头部:标题 + 日期(返回入口统一在页面底部 DocFooterNav)
 const { frontmatter } = useData()
 
 function formatDate(date: unknown): string {
@@ -15,7 +15,6 @@ function formatDate(date: unknown): string {
 
 <template>
   <div class="note-detail-head">
-    <a class="note-back-link" :href="withBase('/notes/')">← 学习随笔</a>
     <h1 class="note-detail-title">{{ frontmatter.title }}</h1>
     <p v-if="frontmatter.date" class="note-detail-date">{{ formatDate(frontmatter.date) }}</p>
   </div>
