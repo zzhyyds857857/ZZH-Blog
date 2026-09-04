@@ -37,6 +37,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '文章', link: '/posts/' },
       { text: '项目', link: '/projects' },
+      { text: '学习随笔', link: '/notes/' },
       { text: '关于', link: '/about' }
     ],
     socialLinks: [{ icon: 'github', link: 'https://github.com/zzhyyds857857' }],

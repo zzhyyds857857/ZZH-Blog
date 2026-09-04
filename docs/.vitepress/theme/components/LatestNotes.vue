@@ -12,7 +12,7 @@ withDefaults(defineProps<{ limit?: number }>(), { limit: 3 })
         <h2 class="section-title">学习随笔</h2>
         <p class="section-subtitle">记录最近的学习、开发、踩坑和思考。</p>
       </div>
-      <a class="view-all" :href="withBase('/notes/')">查看全部</a>
+      <a class="view-all" :href="withBase('/notes/')">查看全部 →</a>
     </header>
     <ul class="note-list">
       <li v-for="note in notes.slice(0, limit)" :key="note.url" class="note-item">

@@ -69,7 +69,7 @@
   --vp-c-text-3: var(--zzh-text-tertiary);
   --vp-c-border: var(--zzh-border);
   --vp-c-gutter: var(--zzh-border);
-  --vp-nav-bg-color: rgb(246 249 253 / 60%);
+  --vp-nav-bg-color: rgb(254 255 255 / 60%);
   --vp-nav-logo-height: 34px;
   --vp-c-bg: var(--zzh-bg);
   --vp-c-bg-soft: #eef2f9;
@@ -795,6 +795,177 @@
   padding: var(--zzh-space-12) var(--zzh-space-6);
 }
 
+/* ===================== 学习随笔列表页(按年分组的时间线 + 轻卡片) ===================== */
+/* 与首页轻列表、文章列表页形成产品定位差异:这里是“成长记录时间线” */
+.note-timeline-group + .note-timeline-group {
+  margin-top: var(--zzh-space-6);
+}
+
+.note-timeline-year {
+  margin: var(--zzh-space-8) 0 var(--zzh-space-3);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--zzh-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.note-timeline-group:first-of-type .note-timeline-year {
+  margin-top: 0;
+}
+
+.note-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 var(--zzh-space-4);
+  border-left: 1px solid var(--zzh-note-line);
+}
+
+.note-entry {
+  position: relative;
+}
+
+/* 时间线节点:白心 + 主题蓝细边,极简 */
+.note-entry::before {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: calc(-1 * var(--zzh-space-4) - 5px);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--zzh-bg);
+  border: 2px solid var(--zzh-primary);
+}
+
+.note-card {
+  display: block;
+  margin-bottom: var(--zzh-space-4);
+  padding: 20px 24px;
+  background-color: var(--zzh-surface);
+  border: 1px solid var(--zzh-border);
+  border-radius: var(--zzh-radius-lg);
+  box-shadow: var(--zzh-shadow-soft);
+  text-decoration: none;
+  transform: translateZ(0);
+  transition: box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.note-entry:last-child .note-card {
+  margin-bottom: 0;
+}
+
+.note-card-date {
+  display: block;
+  margin-bottom: var(--zzh-space-1);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--zzh-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.note-card-title {
+  display: block;
+  margin-bottom: var(--zzh-space-1);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: var(--zzh-text);
+  transition: color 0.2s ease;
+}
+
+.note-card-desc {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--zzh-text-secondary);
+}
+
+@media (max-width: 639px) {
+  .note-card {
+    padding: 18px 20px;
+  }
+}
+
+/* ===================== 学习随笔详情(干净有边界的内容容器) ===================== */
+/* frontmatter pageClass: note-detail 挂在 Layout 根元素上;
+   主题 .VPDoc .content 上限 752/784px(含 64px padding),放宽到 848px 才能让正文容器达到 780px */
+.note-detail .VPDoc.VPDoc .content {
+  max-width: 848px;
+}
+
+.note-detail .VPDoc.VPDoc .content-container {
+  max-width: 780px;
+}
+
+.note-detail .vp-doc {
+  max-width: 780px;
+  margin: 0 auto var(--zzh-space-12);
+  padding: 36px 40px;
+  background-color: var(--zzh-surface);
+  border: 1px solid var(--zzh-border);
+  border-radius: 20px;
+  box-shadow: var(--zzh-shadow-soft);
+  /* 详情正文阅读排版:16px / 1.85,标题 600 不过重 */
+  color: var(--zzh-text-body);
+  font-size: 16px;
+}
+
+/* “最后更新”孤悬在内容卡片之外,随笔详情隐藏 */
+.note-detail .VPDocFooter {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .note-detail .vp-doc {
+    padding: 24px 20px;
+  }
+}
+
+.note-back-link {
+  display: inline-block;
+  margin-bottom: var(--zzh-space-4);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--zzh-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.note-detail-date {
+  margin: 0 0 var(--zzh-space-6);
+  padding-bottom: var(--zzh-space-4);
+  border-bottom: 1px solid var(--zzh-note-line);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--zzh-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 详情正文阅读排版:标题层级与正文字号 */
+.note-detail .vp-doc p {
+  line-height: 1.85;
+}
+
+.note-detail .vp-doc .note-detail-title {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--zzh-text);
+}
+
+.note-detail .vp-doc h2 {
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.note-detail .vp-doc h3 {
+  font-size: 19px;
+  font-weight: 600;
+}
+
 /* ===================== 学习历程(用于关于页,v3 #14) ===================== */
 .journey-list {
   list-style: none;
@@ -897,7 +1068,7 @@
 /* 页面顶部:高透明度浅白蓝玻璃,透出下方页面,带极淡底边
    (双类书写使特异度达 (0,5,0),压过主题 [data-v] + :not 链的基础规则,避免 !important) */
 .VPNavBar.VPNavBar.top.top:not(.screen-open) {
-  background-color: rgb(246 249 253 / 22%);
+  background-color: rgb(254 255 255 / 22%);
 }
 
 .VPNavBar.VPNavBar.top.top .divider-line.divider-line {
@@ -1003,6 +1174,20 @@
   .category-chip:hover {
     color: var(--zzh-primary);
     border-color: var(--zzh-primary);
+  }
+
+  /* 学习随笔列表卡片:只增强阴影与边框色,本体不位移 */
+  .note-card:hover {
+    box-shadow: var(--zzh-shadow-soft-hover);
+    border-color: rgb(113 134 230 / 24%);
+  }
+
+  .note-card:hover .note-card-title {
+    color: var(--zzh-primary);
+  }
+
+  .note-back-link:hover {
+    color: var(--zzh-primary);
   }
 
   .hero-btn-solid:hover {

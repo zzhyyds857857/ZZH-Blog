@@ -2,7 +2,10 @@
 title: 整理 Redis 分布式锁
 date: 2026-08-30
 description: 重新整理 Redlock 相关内容时,对"锁的续期问题"有了新的理解,补充到了文章里。
+pageClass: note-detail
 ---
+
+<NoteDetailHeader />
 
 今天把之前写的《深入解析 Redis 分布式锁与 Redlock》重新整理了一遍。
 

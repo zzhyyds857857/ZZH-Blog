@@ -2,7 +2,10 @@
 title: 重新学习 Vue 3 组件通信
 date: 2026-09-01
 description: 今天重新梳理了 Vue 3 的组件通信方式,把 props / emits / v-model / provide-inject 的适用边界整理了一遍。
+pageClass: note-detail
 ---
+
+<NoteDetailHeader />
 
 今天重新梳理了一遍 Vue 3 的组件通信方式,发现自己之前用的时候更多是"能跑就行",对每种方式的适用边界其实理解得不够清楚。
 

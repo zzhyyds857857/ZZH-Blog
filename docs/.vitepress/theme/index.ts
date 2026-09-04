@@ -15,6 +15,7 @@ import CategoryList from './components/CategoryList.vue'
 import ProjectLinks from './components/ProjectLinks.vue'
 import LatestNotes from './components/LatestNotes.vue'
 import NotesList from './components/NotesList.vue'
+import NoteDetailHeader from './components/NoteDetailHeader.vue'
 import LearningJourney from './components/LearningJourney.vue'
 import SiteFooter from './components/SiteFooter.vue'
 
@@ -39,6 +40,7 @@ export default {
     app.component('ProjectLinks', ProjectLinks)
     app.component('LatestNotes', LatestNotes)
     app.component('NotesList', NotesList)
+    app.component('NoteDetailHeader', NoteDetailHeader)
     app.component('LearningJourney', LearningJourney)
   }
 } satisfies Theme

@@ -2,7 +2,10 @@
 title: 重新设计 ZZH-Blog 首页的一些思考
 date: 2026-09-02
 description: 今天重新思考了个人博客应该更像简历还是更像自己的技术空间,最终决定弱化个人介绍,把更多空间留给文章和学习记录。
+pageClass: note-detail
 ---
+
+<NoteDetailHeader />
 
 今天花了不少时间重新思考 ZZH-Blog 的首页应该长什么样。
 
