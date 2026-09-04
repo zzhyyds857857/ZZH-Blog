@@ -7,17 +7,17 @@
 
 /* ===================== Tokens(亮色) ===================== */
 :root {
-  /* 色板 */
-  --zzh-bg: #f7f9fc;
-  --zzh-surface: rgb(255 255 255 / 94%);
+  /* 色板:全站统一纯色浅白蓝背景,灰字整体加深保证可读性 */
+  --zzh-bg: #f6f9fd;
+  --zzh-surface: rgb(255 255 255 / 96%);
   --zzh-text: #182337;
-  --zzh-text-body: #4f5b70;
-  --zzh-text-secondary: #7c8799;
-  --zzh-text-tertiary: #a3acba;
+  --zzh-text-body: #4d5d73;
+  --zzh-text-secondary: #697990;
+  --zzh-text-tertiary: #7d8a9d;
   --zzh-primary: #7186e6;
   --zzh-primary-hover: #6278dd;
   --zzh-primary-soft: #eff3ff;
-  --zzh-border: rgb(221 230 242 / 94%);
+  --zzh-border: rgb(218 228 241 / 90%);
   --zzh-divider: #edf0f5;
   --zzh-note-line: #dce4f2;
 
@@ -27,8 +27,8 @@
   --zzh-radius-lg: 18px;
 
   /* 阴影:统一双层极轻体系(浅边框 + 多层柔影构成立体感) */
-  --zzh-shadow-soft: 0 12px 34px rgb(40 56 84 / 7.5%), 0 2px 7px rgb(40 56 84 / 3.5%);
-  --zzh-shadow-soft-hover: 0 18px 44px rgb(40 56 84 / 12%);
+  --zzh-shadow-soft: 0 10px 30px rgb(42 58 82 / 7%), 0 2px 6px rgb(42 58 82 / 3.5%);
+  --zzh-shadow-soft-hover: 0 16px 38px rgb(42 58 82 / 11%);
 
   /* 统一间距尺度 */
   --zzh-space-1: 4px;
@@ -46,9 +46,9 @@
   --zzh-space-24: 96px;
 
   /* Hero 主按钮(柔和蓝,与主色同系但更浅) */
-  --zzh-btn-solid-bg: #7b8ee6;
+  --zzh-btn-solid-bg: #7188d8;
   --zzh-btn-solid-fg: #ffffff;
-  --zzh-btn-solid-hover: #6679dd;
+  --zzh-btn-solid-hover: #5f74c8;
 
   /* 内容列宽 */
   --zzh-max-width: 720px;
@@ -69,7 +69,7 @@
   --vp-c-text-3: var(--zzh-text-tertiary);
   --vp-c-border: var(--zzh-border);
   --vp-c-gutter: var(--zzh-border);
-  --vp-nav-bg-color: rgb(255 255 255 / 60%);
+  --vp-nav-bg-color: rgb(246 249 253 / 60%);
   --vp-nav-logo-height: 34px;
   --vp-c-bg: var(--zzh-bg);
   --vp-c-bg-soft: #eef2f9;
@@ -83,7 +83,7 @@
   --zzh-text: #e5eaf4;
   --zzh-text-body: #dce2ee;
   --zzh-text-secondary: #a3adbd;
-  --zzh-text-tertiary: #6e7a90;
+  --zzh-text-tertiary: #7e8aa0;
   --zzh-primary: #8b9cff;
   --zzh-primary-hover: #a5b3ff;
   --zzh-primary-soft: rgb(139 156 255 / 14%);
@@ -91,8 +91,8 @@
   --zzh-divider: #232c40;
   --zzh-note-line: rgb(53 64 87 / 88%);
 
-  --zzh-shadow-soft: 0 12px 34px rgb(0 0 0 / 22%), 0 2px 7px rgb(0 0 0 / 12%);
-  --zzh-shadow-soft-hover: 0 18px 44px rgb(0 0 0 / 28%);
+  --zzh-shadow-soft: 0 10px 30px rgb(0 0 0 / 22%), 0 2px 6px rgb(0 0 0 / 12%);
+  --zzh-shadow-soft-hover: 0 16px 38px rgb(0 0 0 / 28%);
 
   --zzh-btn-solid-bg: var(--zzh-primary);
   --zzh-btn-solid-fg: #101522;
@@ -116,17 +116,11 @@
   padding: 0 var(--zzh-space-6) var(--zzh-space-8);
 }
 
-/* 首页视觉分区:Hero 纯白为主,向下柔和过渡到页面主背景,无硬切切割 */
-.home-band-light {
-  background:
-    radial-gradient(1100px 480px at 50% -120px, rgb(226 236 255 / 55%), transparent 70%),
-    linear-gradient(180deg, #ffffff 0%, #ffffff 58%, var(--zzh-bg) 100%);
-}
-
+/* 全站纯色背景:Hero、文章区、随笔、Footer 共用同一块浅白蓝,
+   不使用任何渐变、光斑、图案与纹理 */
+.home-band-light,
 .dark .home-band-light {
-  background:
-    radial-gradient(1100px 480px at 50% -120px, rgb(139 156 255 / 8%), transparent 70%),
-    linear-gradient(180deg, #121828 0%, #121828 58%, var(--zzh-bg) 100%);
+  background-color: var(--zzh-bg);
 }
 
 /* 随笔区直接用页面主背景,顶部 48px 留白自然进入,不做独立色块 */
@@ -172,22 +166,14 @@
   }
 }
 
-/* 移动端 Hero 副文案自然流动,不强制四行 */
-@media (max-width: 639px) {
-  .hero-line-break {
-    display: none;
-  }
-}
-
 /* 首页区块之间靠留白与背景色区分,不再画横线 */
 .home-section {
   padding-top: var(--zzh-space-8);
 }
 
-/* ===================== 大 Hero(纯白主体 + 单一整体空间光晕) ===================== */
+/* ===================== 大 Hero(纯色背景,无任何装饰) ===================== */
 .hero {
   position: relative;
-  overflow: hidden;
   padding: var(--zzh-space-16) 0 var(--zzh-space-12);
   text-align: center;
 }
@@ -198,41 +184,25 @@
   }
 }
 
-/* 唯一的空间光晕:顶部大片极浅蓝向下渐隐,像一个整体,不形成多个独立光斑;
-   文字所在中部已衰减到接近纯白。不用任何图案、圆环与纹理 */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    62% 58% at 50% 0%,
-    rgb(228 238 253 / 55%),
-    rgb(240 246 255 / 26%) 55%,
-    transparent 78%
-  );
-}
-
-.dark .hero::before {
-  background: radial-gradient(
-    62% 58% at 50% 0%,
-    rgb(139 156 255 / 6%),
-    transparent 78%
-  );
-}
-
-/* 文字内容在装饰层之上 */
-.hero > * {
-  position: relative;
-  z-index: 1;
-}
-
 .hero-title {
-  margin: 0 0 var(--zzh-space-5);
-  font-size: clamp(38px, 4.6vw, 50px);
-  line-height: 1.22;
+  margin: 0 0 var(--zzh-space-3);
+  font-size: clamp(38px, 4.65vw, 50px);
+  line-height: 1.2;
   font-weight: 600;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
+  color: var(--zzh-text);
+}
+
+/* 副标题:介于主标题与描述之间的第二层级 */
+.hero-subtitle {
+  margin: 0 0 var(--zzh-space-2);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #26354b;
+}
+
+.dark .hero-subtitle {
   color: var(--zzh-text);
 }
 
@@ -241,26 +211,17 @@
   max-width: 620px;
   font-size: 15px;
   font-weight: 400;
-  line-height: 1.9;
+  line-height: 1.7;
   color: var(--zzh-text-secondary);
 }
 
-/* 技术方向 + 品牌口号:两行纯文字,禁止卡片/pill/图标 */
+/* 按钮下方的技术方向:纯文字,禁止卡片/pill/图标 */
 .hero-tags {
   margin: 18px 0 0;
   font-size: 12.5px;
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--zzh-text-tertiary);
-}
-
-.hero-motto {
-  margin: 6px 0 0;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: var(--zzh-text-tertiary);
-  opacity: 0.85;
 }
 
 .hero-actions {
@@ -273,11 +234,15 @@
 
 /* Hero 入场:轻微淡入 + 上移,一次性,不循环 */
 .hero-title,
+.hero-subtitle,
 .hero-description,
 .hero-actions,
-.hero-tags,
-.hero-motto {
+.hero-tags {
   animation: hero-rise 0.6s ease-out both;
+}
+
+.hero-subtitle {
+  animation-delay: 0.06s;
 }
 
 .hero-description {
@@ -290,10 +255,6 @@
 
 .hero-tags {
   animation-delay: 0.32s;
-}
-
-.hero-motto {
-  animation-delay: 0.38s;
 }
 
 @keyframes hero-rise {
@@ -321,34 +282,17 @@
 .hero-btn-solid {
   background-color: var(--zzh-btn-solid-bg);
   color: var(--zzh-btn-solid-fg);
-  box-shadow: 0 8px 22px rgb(123 142 230 / 16%);
-}
-
-.hero-btn-solid:hover {
-  background-color: var(--zzh-btn-solid-hover);
-  box-shadow: 0 10px 26px rgb(123 142 230 / 22%);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgb(113 136 216 / 16%);
 }
 
 .hero-btn-outline {
-  border: 1px solid rgb(125 150 190 / 22%);
+  border: 1px solid rgb(113 137 181 / 28%);
   background-color: rgb(255 255 255 / 72%);
   color: var(--zzh-text-body);
 }
 
-.hero-btn-outline:hover {
-  border-color: rgb(113 134 230 / 30%);
-  color: var(--zzh-primary);
-  background-color: rgb(255 255 255 / 96%);
-  transform: translateY(-2px);
-}
-
 .dark .hero-btn-solid {
   box-shadow: 0 8px 22px rgb(139 156 255 / 18%);
-}
-
-.dark .hero-btn-solid:hover {
-  box-shadow: 0 10px 26px rgb(139 156 255 / 24%);
 }
 
 .dark .hero-btn-outline {
@@ -356,17 +300,12 @@
   background-color: var(--zzh-surface);
 }
 
-.dark .hero-btn-outline:hover {
-  border-color: var(--zzh-primary);
-  background-color: var(--zzh-primary-soft);
-}
-
 /* ===================== Section Header ===================== */
 .section-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin: 0 0 var(--zzh-space-4);
+  margin: 0 0 var(--zzh-space-5);
 }
 
 .section-title {
@@ -408,10 +347,6 @@
   transition: color 0.2s ease;
 }
 
-.view-all:hover {
-  color: var(--zzh-primary-hover);
-}
-
 /* ===================== Post List(高级极简博客卡片) ===================== */
 .post-list {
   list-style: none;
@@ -419,6 +354,8 @@
   padding: 0;
 }
 
+/* 文章卡片:本体永不位移(translateZ(0) 仅提升合成层),
+   hover 只改阴影/边框色,命中区域前后完全一致,从机制上消除边缘抖动 */
 .post-item-link {
   display: block;
   margin-bottom: 16px;
@@ -428,13 +365,8 @@
   border-radius: var(--zzh-radius-lg);
   box-shadow: var(--zzh-shadow-soft);
   text-decoration: none;
-  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
-}
-
-.post-item-link:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--zzh-shadow-soft-hover);
-  border-color: rgb(113 134 230 / 25%);
+  transform: translateZ(0);
+  transition: box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease;
 }
 
 .post-list > .post-item:last-child .post-item-link {
@@ -464,15 +396,10 @@
   line-height: 1.5;
   letter-spacing: -0.015em;
   color: var(--zzh-text);
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease;
 }
 
-.post-item-link:hover .post-title {
-  color: var(--zzh-primary);
-  transform: translateX(3px);
-}
-
-/* 箭头默认隐藏,hover 淡入(纯装饰,不进入无障碍树) */
+/* 箭头常驻占位、默认透明(hover 淡入),不改变标题布局宽度 */
 .post-title::after {
   content: '→';
   display: inline-block;
@@ -481,11 +408,6 @@
   opacity: 0;
   transform: translateX(-6px);
   transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.post-item-link:hover .post-title::after {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 /* 标签:浅蓝底 pill */
@@ -559,11 +481,6 @@
   transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.category-chip:hover {
-  color: var(--zzh-primary);
-  border-color: var(--zzh-primary);
-}
-
 .category-chip.active {
   color: var(--zzh-primary);
   border-color: var(--zzh-primary);
@@ -607,12 +524,8 @@
   border-radius: var(--zzh-radius-md);
   background-color: var(--zzh-surface);
   box-shadow: var(--zzh-shadow-soft);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.project-card:hover {
-  border-color: var(--zzh-primary);
-  transform: translateY(-1px);
+  transform: translateZ(0);
+  transition: box-shadow 220ms ease, border-color 220ms ease;
 }
 
 .project-head {
@@ -690,18 +603,15 @@
 }
 
 /* ===================== 首页侧边栏(轻量信息栏,辅助不抢主内容) ===================== */
+/* 侧栏卡片:hover 只轻微增强阴影,不位移 */
 .side-card {
   padding: 20px 22px;
   border: 1px solid var(--zzh-border);
   border-radius: var(--zzh-radius-lg);
   background-color: var(--zzh-surface);
   box-shadow: var(--zzh-shadow-soft);
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.side-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--zzh-shadow-soft-hover);
+  transform: translateZ(0);
+  transition: box-shadow 220ms ease;
 }
 
 .side-card + .side-card {
@@ -750,10 +660,6 @@
   transition: opacity 0.2s ease;
 }
 
-.about-card-github:hover {
-  opacity: 0.8;
-}
-
 /* 分类专栏 */
 .category-list {
   list-style: none;
@@ -772,11 +678,6 @@
   color: var(--zzh-text-secondary);
   text-decoration: none;
   transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.category-item:hover {
-  color: var(--zzh-primary);
-  background-color: var(--zzh-primary-soft);
 }
 
 .category-item .category-count {
@@ -798,12 +699,7 @@
   margin: 0 -10px;
   border-radius: var(--zzh-radius-sm);
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.project-link-item:hover {
-  background-color: var(--zzh-primary-soft);
-  transform: translateX(3px);
+  transition: background-color 0.2s ease;
 }
 
 .project-link-name {
@@ -811,7 +707,7 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--zzh-text);
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .project-link-item:hover .project-link-name {
@@ -991,38 +887,40 @@
   font-size: 15px;
 }
 
-/* ===================== Header(极透明毛玻璃,像浮在页面上的一层轻玻璃) ===================== */
+/* ===================== Header(透明玻璃层,能明显透出页面) ===================== */
 .VPNavBar {
   backdrop-filter: blur(20px) saturate(145%);
   -webkit-backdrop-filter: blur(20px) saturate(145%);
-  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+  transition: box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
 }
 
-/* 页面顶部:几乎全透明,无阴影、无分割线
+/* 页面顶部:高透明度浅白蓝玻璃,透出下方页面,带极淡底边
    (双类书写使特异度达 (0,5,0),压过主题 [data-v] + :not 链的基础规则,避免 !important) */
 .VPNavBar.VPNavBar.top.top:not(.screen-open) {
-  background-color: rgb(255 255 255 / 6%);
+  background-color: rgb(246 249 253 / 22%);
 }
 
 .VPNavBar.VPNavBar.top.top .divider-line.divider-line {
-  background-color: transparent;
+  background-color: rgb(210 222 238 / 24%);
 }
 
-/* 滚动后:收紧背景 + 极轻阴影 */
+/* 滚动后:收紧玻璃 + 极轻阴影 */
 .VPNavBar:not(.top) {
-  box-shadow: 0 8px 28px rgb(35 50 78 / 5.5%);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: 0 8px 30px rgb(42 58 82 / 6%);
 }
 
 .dark .VPNavBar.VPNavBar.top.top:not(.screen-open) {
-  background-color: rgb(16 21 34 / 6%);
+  background-color: rgb(16 21 34 / 20%);
 }
 
 .dark .VPNavBar:not(.top) {
-  box-shadow: 0 8px 28px rgb(0 0 0 / 18%);
+  box-shadow: 0 8px 30px rgb(0 0 0 / 18%);
 }
 
 .VPNavBar.VPNavBar.VPNavBar .divider-line.divider-line {
-  background-color: rgb(220 230 242 / 45%);
+  background-color: rgb(210 222 238 / 42%);
 }
 
 .dark .VPNavBar.VPNavBar.VPNavBar .divider-line.divider-line {
@@ -1041,13 +939,110 @@
   }
 }
 
+/* ===================== Hover 交互(仅在支持 hover 的指针设备启用) ===================== */
+/* 集中管理:触屏设备不启用粘滞 hover 状态;
+   所有 hover 只改颜色/阴影/透明度,严禁改变布局尺寸与命中区域 */
+@media (hover: hover) and (pointer: fine) {
+  /* 文章卡片:只浮阴影与边框色,本体不动 */
+  .post-item-link:hover {
+    box-shadow: var(--zzh-shadow-soft-hover);
+    border-color: rgb(113 134 230 / 24%);
+  }
+
+  /* 点击反馈:只改透明度 */
+  .post-item-link:active {
+    opacity: 0.96;
+  }
+
+  .post-item-link:hover .post-title {
+    color: var(--zzh-primary);
+  }
+
+  .post-item-link:hover .post-title::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* 侧栏/项目卡:只增强阴影 */
+  .side-card:hover {
+    box-shadow: var(--zzh-shadow-soft-hover);
+  }
+
+  .project-card:hover {
+    box-shadow: var(--zzh-shadow-soft-hover);
+    border-color: rgb(113 134 230 / 24%);
+  }
+
+  /* 侧栏行与分类行:轻背景高亮 */
+  .category-item:hover {
+    color: var(--zzh-primary);
+    background-color: var(--zzh-primary-soft);
+  }
+
+  .project-link-item:hover {
+    background-color: var(--zzh-primary-soft);
+  }
+
+  .project-link-item:hover .project-link-name {
+    color: var(--zzh-primary);
+  }
+
+  .note-item:hover::before {
+    background-color: var(--zzh-primary);
+  }
+
+  /* 链接与按钮 */
+  .view-all:hover {
+    color: var(--zzh-primary-hover);
+  }
+
+  .about-card-github:hover {
+    opacity: 0.8;
+  }
+
+  .category-chip:hover {
+    color: var(--zzh-primary);
+    border-color: var(--zzh-primary);
+  }
+
+  .hero-btn-solid:hover {
+    background-color: var(--zzh-btn-solid-hover);
+    box-shadow: 0 10px 26px rgb(113 136 216 / 22%);
+    transform: translateY(-1px);
+  }
+
+  .hero-btn-outline:hover {
+    border-color: rgb(113 134 230 / 30%);
+    color: var(--zzh-primary);
+    background-color: rgb(255 255 255 / 94%);
+    transform: translateY(-1px);
+  }
+
+  .dark .hero-btn-solid:hover {
+    box-shadow: 0 10px 26px rgb(139 156 255 / 24%);
+    transform: translateY(-1px);
+  }
+
+  .dark .hero-btn-outline:hover {
+    border-color: var(--zzh-primary);
+    background-color: var(--zzh-primary-soft);
+    transform: translateY(-1px);
+  }
+}
+
 /* ===================== 导航栏微调 ===================== */
 .VPNavBar .title {
   font-weight: 500;
   letter-spacing: -0.01em;
 }
 
-/* ===================== 无障碍:reduced motion(v2 #34) ===================== */
+/* ===================== 无障碍:键盘焦点与 reduced motion ===================== */
+/* 键盘焦点:用 outline 指示,不改边框宽度,不引发布局变化 */
+:focus-visible {
+  outline: 2px solid var(--zzh-primary);
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
