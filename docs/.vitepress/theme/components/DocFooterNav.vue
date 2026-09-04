@@ -42,16 +42,13 @@ const next = computed(() =>
 )
 
 const backHref = computed(() => withBase(kind.value === 'note' ? '/notes/' : '/posts/'))
-const backLabel = computed(() => (kind.value === 'note' ? '返回学习随笔列表' : '返回文章列表'))
+const backLine2 = computed(() => (kind.value === 'note' ? '学习随笔' : '文章列表'))
 </script>
 
 <template>
   <nav v-if="kind" class="doc-footer-nav" aria-label="页面导航">
-    <a
-      v-if="prev"
-      class="doc-nav-btn doc-nav-side"
-      :href="withBase(prev.url)"
-    >
+    <!-- 左右按钮由 grid 1fr 等宽,标题截断,不因文字长短改变尺寸 -->
+    <a v-if="prev" class="doc-nav-btn doc-nav-side" :href="withBase(prev.url)">
       <span class="doc-nav-label">上一篇</span>
       <span class="doc-nav-title">{{ prev.title }}</span>
     </a>
@@ -60,13 +57,12 @@ const backLabel = computed(() => (kind.value === 'note' ? '返回学习随笔列
       <span class="doc-nav-title">已经是最新一篇</span>
     </span>
 
-    <a class="doc-nav-btn doc-nav-back" :href="backHref">{{ backLabel }}</a>
+    <a class="doc-nav-btn doc-nav-back" :href="backHref">
+      <span>返回</span>
+      <span>{{ backLine2 }}</span>
+    </a>
 
-    <a
-      v-if="next"
-      class="doc-nav-btn doc-nav-side"
-      :href="withBase(next.url)"
-    >
+    <a v-if="next" class="doc-nav-btn doc-nav-side" :href="withBase(next.url)">
       <span class="doc-nav-label">下一篇</span>
       <span class="doc-nav-title">{{ next.title }}</span>
     </a>

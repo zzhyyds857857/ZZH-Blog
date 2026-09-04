@@ -777,161 +777,164 @@ body {
 
 /* ===================== 学习随笔页 ===================== */
 .notes-page {
-  max-width: var(--zzh-max-width);
+  /* 便签卡列表主体 920px + 左右 padding 24px×2 */
+  max-width: 968px;
   margin: 0 auto;
   padding: var(--zzh-space-12) var(--zzh-space-6);
 }
 
-/* ===================== 学习随笔列表页(按年分组的时间线 + 轻卡片) ===================== */
-/* 与首页轻列表、文章列表页形成产品定位差异:这里是“成长记录时间线” */
-.note-timeline-group + .note-timeline-group {
-  margin-top: var(--zzh-space-6);
+/* ===================== 学习随笔列表页(便签纸卡片,无时间轴) ===================== */
+.notes-sheet {
+  max-width: 920px;
+  margin: 0 auto;
 }
 
-.note-timeline-year {
-  margin: var(--zzh-space-8) 0 var(--zzh-space-3);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--zzh-text-tertiary);
-  font-variant-numeric: tabular-nums;
-}
-
-.note-timeline-group:first-of-type .note-timeline-year {
-  margin-top: 0;
-}
-
-.note-timeline {
+.note-sheet-list {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 var(--zzh-space-4);
-  border-left: 1px solid var(--zzh-note-line);
+  padding: 0;
 }
 
-.note-entry {
-  position: relative;
+.note-sheet-item:last-child .note-sheet {
+  margin-bottom: 0;
 }
 
-/* 时间线节点:白心 + 主题蓝细边,极简 */
-.note-entry::before {
-  content: '';
-  position: absolute;
-  top: 27px;
-  left: calc(-1 * var(--zzh-space-4) - 5px);
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background-color: var(--zzh-surface);
-  border: 2px solid var(--zzh-primary);
-}
-
-.note-card {
+/* 便签纸:直角、暖边框、极轻阴影,纸张感而不做真便利贴 */
+.note-sheet {
   display: block;
-  margin-bottom: var(--zzh-space-4);
-  padding: 20px 24px;
+  margin-bottom: var(--zzh-space-5);
+  padding: 24px 28px;
   background-color: var(--zzh-surface);
-  border: 1px solid var(--zzh-border);
-  border-radius: 6px;
-  box-shadow: var(--zzh-shadow-soft);
+  border: 1px solid #e8dfc9;
+  border-radius: 0;
+  box-shadow: 0 2px 8px rgb(120 108 70 / 6%);
   text-decoration: none;
   transform: translateZ(0);
   transition: box-shadow 220ms ease, border-color 220ms ease;
 }
 
-.note-entry:last-child .note-card {
-  margin-bottom: 0;
-}
-
-.note-card-date {
+.note-sheet-date {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--zzh-note-line);
+  border-bottom: 1px solid #e5ddcb;
   font-size: 13px;
   font-weight: 400;
-  color: var(--zzh-text-tertiary);
+  color: #71809a;
   font-variant-numeric: tabular-nums;
 }
 
-.note-card-title {
+.note-sheet-title {
   display: block;
   margin-bottom: var(--zzh-space-1);
   font-size: 17px;
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: -0.015em;
-  color: var(--zzh-text);
+  color: #253047;
   transition: color 0.2s ease;
 }
 
-.note-card-desc {
+.note-sheet-desc {
   display: block;
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.75;
+  color: #526078;
+}
+
+.dark .note-sheet {
+  background-color: var(--zzh-surface);
+  border-color: var(--zzh-border);
+  box-shadow: var(--zzh-shadow-soft);
+}
+
+.dark .note-sheet-date {
+  border-bottom-color: var(--zzh-divider);
+  color: var(--zzh-text-tertiary);
+}
+
+.dark .note-sheet-title {
+  color: var(--zzh-text);
+}
+
+.dark .note-sheet-desc {
   color: var(--zzh-text-secondary);
 }
 
 @media (max-width: 639px) {
-  .note-card {
-    padding: 18px 20px;
+  .note-sheet {
+    padding: 20px 18px;
   }
 }
 
-/* ===================== 学习随笔详情(干净有边界的内容容器) ===================== */
+/* ===================== 学习随笔详情(浅黄色便签纸容器) ===================== */
 /* frontmatter pageClass: note-detail 挂在 Layout 根元素上;
-   主题 .VPDoc .content 上限 752/784px(含 64px padding),放宽到 848px 才能让正文容器达到 780px */
+   主题 .VPDoc .content 上限 752/784px(含 64px padding),放宽到 944px 才能让正文容器达到 880px */
 .note-detail .VPDoc.VPDoc .content {
-  max-width: 848px;
+  max-width: 944px;
 }
 
 .note-detail .VPDoc.VPDoc .content-container {
-  max-width: 780px;
+  max-width: 880px;
 }
 
 .note-detail .vp-doc {
-  max-width: 780px;
-  margin: 0 auto var(--zzh-space-10);
-  padding: 36px 40px;
+  max-width: 880px;
+  width: calc(100% - 32px);
+  margin: 0 auto var(--zzh-space-4);
+  padding: 48px 44px;
   background-color: var(--zzh-surface);
-  border: 1px solid var(--zzh-border);
-  border-radius: 8px;
-  box-shadow: 0 4px 14px rgb(42 58 82 / 5%);
-  /* 详情正文阅读排版:16px / 1.85,标题 600 不过重 */
-  color: var(--zzh-text-body);
-  font-size: 16px;
+  border: 1px solid #e5ddcb;
+  border-radius: 6px;
+  box-shadow: 0 3px 12px rgb(120 108 70 / 7%);
+  color: #4f5d70;
 }
 
-/* “最后更新”孤悬在内容卡片之外,随笔详情隐藏 */
-.note-detail .VPDocFooter {
+.dark .note-detail .vp-doc {
+  background-color: var(--zzh-surface);
+  border-color: var(--zzh-border);
+  box-shadow: var(--zzh-shadow-soft);
+  color: var(--zzh-text-body);
+}
+
+/* “最后更新”孤悬在内容卡片之外,且显示与否取决于 git 提交时间(各页不一致),
+   统一隐藏,底部导航距正文间距保持一致 */
+.VPDoc .VPDocFooter {
   display: none;
 }
 
 @media (max-width: 639px) {
   .note-detail .vp-doc {
-    padding: 24px 20px;
+    padding: 24px 22px;
   }
 }
 
 .note-detail-date {
   margin: 0 0 var(--zzh-space-6);
   padding-bottom: var(--zzh-space-4);
-  border-bottom: 1px solid var(--zzh-note-line);
+  border-bottom: 1px solid #e5ddcb;
   font-size: 14px;
   font-weight: 400;
-  color: var(--zzh-text-tertiary);
+  color: #71809a;
   font-variant-numeric: tabular-nums;
 }
 
-/* 详情正文阅读排版:标题层级与正文字号 */
-.note-detail .vp-doc p {
-  line-height: 1.85;
+.dark .note-detail-date {
+  border-bottom-color: var(--zzh-divider);
+  color: var(--zzh-text-tertiary);
 }
 
+/* 详情正文阅读排版:标题层级(段落行高由全局 .vp-doc p 提供) */
 .note-detail .vp-doc .note-detail-title {
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: -0.02em;
+  color: #253047;
+}
+
+.dark .note-detail .vp-doc .note-detail-title {
   color: var(--zzh-text);
 }
 
@@ -945,34 +948,31 @@ body {
   font-weight: 600;
 }
 
-/* ===================== 详情页底部导航(三按钮) ===================== */
+/* ===================== 详情页底部导航(三按钮,等宽等高) ===================== */
 /* 由 DocFooterNav 组件渲染于 doc-bottom 插槽,文章与学习随笔详情共用;
+   grid 1fr 96px 1fr 使左右按钮完全等宽,标题截断,尺寸不随文字变化;
    hover 只改颜色/阴影,无 transform,不改变布局尺寸 */
 .doc-footer-nav {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--zzh-space-3);
-  margin: 0 auto var(--zzh-space-10);
+  display: grid;
+  grid-template-columns: 1fr 96px 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 880px;
+  margin: var(--zzh-space-8) auto var(--zzh-space-10);
 }
 
 .doc-nav-btn {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2px;
-  max-width: 300px;
+  gap: 3px;
+  height: 80px;
   padding: 10px 20px;
   background-color: var(--zzh-surface);
   border: 1px solid var(--zzh-border);
   border-radius: 10px;
   text-decoration: none;
   transition: box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease;
-}
-
-.doc-nav-side {
-  min-width: 200px;
 }
 
 .doc-nav-label {
@@ -989,19 +989,25 @@ body {
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
-  color: var(--zzh-text);
+  color: var(--zzh-text-body);
   transition: color 0.2s ease;
 }
 
-/* 中间按钮:主要返回入口,实心主色 */
+/* 中间按钮:正方形(80×80,与左右等高,在 96px 列内居中),与左右同一背景体系 */
 .doc-nav-back {
   align-items: center;
+  justify-content: center;
+  align-self: center;
+  justify-self: center;
   text-align: center;
-  background-color: var(--zzh-btn-solid-bg);
-  border-color: transparent;
-  font-size: 14px;
+  width: 80px;
+  height: 80px;
+  /* 缩小水平 padding,保证“返回 / 学习随笔”稳定两行 */
+  padding: 10px 4px;
+  font-size: 13.5px;
   font-weight: 500;
-  color: #fff;
+  line-height: 1.5;
+  color: var(--zzh-text-body);
 }
 
 .doc-nav-btn.is-disabled {
@@ -1009,14 +1015,43 @@ body {
   cursor: default;
 }
 
+/* 学习随笔详情:底部按钮改白色系,与文章详情一致 */
+.note-detail .doc-nav-btn {
+  background-color: var(--zzh-surface);
+  border-color: #e4ddcc;
+}
+
+.note-detail .doc-nav-label {
+  color: #71809a;
+}
+
+.note-detail .doc-nav-title,
+.note-detail .doc-nav-back {
+  color: #526078;
+}
+
+.dark .doc-nav-btn {
+  background-color: var(--zzh-surface);
+  border-color: var(--zzh-border);
+}
+
+.dark .doc-nav-title,
+.dark .doc-nav-back {
+  color: var(--zzh-text-body);
+}
+
+.dark .doc-nav-label {
+  color: var(--zzh-text-tertiary);
+}
+
 @media (max-width: 639px) {
   .doc-footer-nav {
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: 1fr;
+    justify-items: stretch;
   }
 
-  .doc-nav-side {
-    max-width: none;
+  .doc-nav-back {
+    justify-self: center;
   }
 }
 
@@ -1109,10 +1144,19 @@ body {
 /* 字体栈由 :root 的 --vp-font-family-base 全局提供(Inter 开头) */
 .vp-doc {
   color: var(--zzh-text-body);
-  font-size: 15px;
+  font-size: 16px;
+}
+
+.vp-doc p {
+  line-height: 1.9;
 }
 
 /* ===================== Header(透明玻璃层,能明显透出页面) ===================== */
+/* 主题 .content 默认 padding-bottom 128px,导致详情底部导航与正文间隙过大,压缩到 40px */
+.Layout .VPDoc.VPDoc .content {
+  padding-bottom: 40px;
+}
+
 .VPNavBar {
   backdrop-filter: blur(20px) saturate(145%);
   -webkit-backdrop-filter: blur(20px) saturate(145%);
@@ -1225,29 +1269,24 @@ body {
     border-color: var(--zzh-primary);
   }
 
-  /* 学习随笔列表卡片:只增强阴影与边框色,本体不位移 */
-  .note-card:hover {
-    box-shadow: var(--zzh-shadow-soft-hover);
-    border-color: rgb(113 134 230 / 24%);
+  /* 学习随笔便签卡:只增强阴影与边框色,本体不位移 */
+  .note-sheet:hover {
+    box-shadow: 0 6px 18px rgb(120 108 70 / 10%);
+    border-color: #d8cdb2;
   }
 
-  .note-card:hover .note-card-title {
+  .note-sheet:hover .note-sheet-title {
     color: var(--zzh-primary);
   }
 
-  /* 详情页底部导航:只改颜色与阴影 */
-  .doc-nav-side:hover {
+  /* 详情页底部导航:只改颜色与阴影,无位移 */
+  .doc-nav-btn:hover {
     border-color: rgb(113 134 230 / 30%);
-    box-shadow: var(--zzh-shadow-soft-hover);
+    box-shadow: 0 4px 14px rgb(42 58 82 / 8%);
   }
 
-  .doc-nav-side:hover .doc-nav-title {
+  .doc-nav-btn:hover .doc-nav-title {
     color: var(--zzh-primary);
-  }
-
-  .doc-nav-back:hover {
-    background-color: var(--zzh-btn-solid-hover);
-    box-shadow: 0 8px 20px rgb(113 136 216 / 20%);
   }
 
   .hero-btn-solid:hover {
